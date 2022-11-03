@@ -37,11 +37,11 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
             ),
             GButton(
               icon: Icons.add_circle_outline,
-              text: 'Donate',
+              text: 'Register',
             ),
             GButton(
-              icon: Icons.assignment,
-              text: 'Donations',
+              icon: Icons.people,
+              text: 'Categories',
             ),
             GButton(
               icon: Icons.dehaze,

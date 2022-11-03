@@ -48,7 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height: 30,
+                height: 50,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -59,15 +59,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: 150),
                 ],
               ),
-              const Text(
-                'Hello!',
-                style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
+              
               Padding(
-                padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
+                padding: const EdgeInsets.fromLTRB(0, 60, 0, 0),
                 child: Form(
                   key: _formKey,
                   child: SingleChildScrollView(

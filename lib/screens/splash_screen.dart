@@ -36,13 +36,13 @@ class _SplashScreenState extends State<SplashScreen> {
             children: [
               Image.asset(
                 'assets/images/SplashLogo.png',
-                height: 280,
-                width: 280,
+                height: 300,
+                width: 300,
               ),
               SizedBox(height: 10),
               const SpinKitThreeBounce(
                 color: Colors.white,
-                size: 50.0,
+                size: 30.0,
               ),
             ],
           ),

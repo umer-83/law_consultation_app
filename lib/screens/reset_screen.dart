@@ -26,7 +26,7 @@ class _ResetScreenState extends State<ResetScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 50),
+            const SizedBox(height: 70),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: const [
@@ -36,15 +36,7 @@ class _ResetScreenState extends State<ResetScreen> {
                     height: 150),
               ],
             ),
-            SizedBox(
-              height: 30,
-            ),
-            const Text('Reset\nYour Password!',
-                textAlign: TextAlign.start,
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.w700)),
-            const SizedBox(
-              height: 30,
-            ),
+            SizedBox(height: 60),
             TextFormField(
               controller: emailTextController,
               obscureText: false,

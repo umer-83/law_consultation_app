@@ -2,7 +2,6 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import '../typography/semibold_green.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -51,7 +50,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(
-                  height: 30,
+                  height: 50,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -63,12 +62,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 10),
-                const Text('Signup here!',
-                    style:
-                        TextStyle(fontSize: 30, fontWeight: FontWeight.w700)),
+               
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 40, 0, 0),
+                  padding: const EdgeInsets.fromLTRB(0, 60, 0, 0),
                   child: Form(
                     key: _formKey,
                     child: SingleChildScrollView(

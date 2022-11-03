@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_constructors, sort_child_properties_last
 
-import 'dart:ffi';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -11,12 +10,11 @@ import 'package:image_picker/image_picker.dart';
 
 import '../widgets/bottom_navigation_bar.dart';
 
-
-class ServiceAddPage extends StatefulWidget {
+class CreateLawyerProfile extends StatefulWidget {
   final bool initialized;
   final bool error;
   final Function? addNewService;
-  const ServiceAddPage({
+  const CreateLawyerProfile({
     Key? key,
     required this.initialized,
     required this.error,
@@ -24,10 +22,10 @@ class ServiceAddPage extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _ServiceAddPageState createState() => _ServiceAddPageState();
+  _CreateLawyerProfileState createState() => _CreateLawyerProfileState();
 }
 
-class _ServiceAddPageState extends State<ServiceAddPage> {
+class _CreateLawyerProfileState extends State<CreateLawyerProfile> {
   bool loading = false;
   File? imageFile;
   List<File> workImageFile = [];
@@ -40,6 +38,9 @@ class _ServiceAddPageState extends State<ServiceAddPage> {
   TextEditingController description = TextEditingController();
   TextEditingController phone = TextEditingController();
   TextEditingController quanti = TextEditingController();
+  TextEditingController city = TextEditingController();
+  TextEditingController fee = TextEditingController();
+
   bool avail = true;
 
   Future<void> SelectImageFromGallery() async {
@@ -69,6 +70,8 @@ class _ServiceAddPageState extends State<ServiceAddPage> {
     var descripton = description.text;
     var addres = address.text;
     var quant = quanti.text;
+    var feee = fee.text;
+    var cityy =city.text;
     setState(
       () {
         Future.delayed(
@@ -107,6 +110,8 @@ class _ServiceAddPageState extends State<ServiceAddPage> {
           'phone': phon,
           'email': quant,
           'yofexp': service,
+          'city': cityy,
+          'fee': feee,
           
         })
         .then((value) => print('User Added'))
@@ -142,7 +147,7 @@ class _ServiceAddPageState extends State<ServiceAddPage> {
     if (index == 0) {
       Navigator.pushReplacementNamed(context, '/home');
     } else if (index == 2) {
-      Navigator.pushReplacementNamed(context, '/donation');
+      Navigator.pushReplacementNamed(context, '/categories');
     } else if (index == 3) {
       Navigator.pushReplacementNamed(context, '/more');
     }
@@ -151,17 +156,7 @@ class _ServiceAddPageState extends State<ServiceAddPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFE9E6E6),
       appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: const Color(0xff8C52FF),
-        title: const Text(
-          'Donate Medicine ',
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        ),
-        elevation: 4,
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
@@ -172,6 +167,16 @@ class _ServiceAddPageState extends State<ServiceAddPage> {
             Navigator.pushReplacementNamed(context, '/home');
           },
         ),
+        title: const Text(
+          "Create Lawyer Profile",
+          style: TextStyle(
+            fontSize: 20,
+            color: Colors.white,
+          ),
+        ),
+        backgroundColor: const Color(0xff4F7344),
+        elevation: 1,
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
         child: SafeArea(
@@ -251,8 +256,8 @@ class _ServiceAddPageState extends State<ServiceAddPage> {
                               border: UnderlineInputBorder(
                                   borderSide:
                                       BorderSide(color: Colors.blue, width: 2)),
-                              hintText: 'Medicine Name',
-                              labelText: "Medicine  Name"),
+                              hintText: 'Lawyer Name',
+                              labelText: "Lawyer  Name"),
                         ),
                         TextField(
                           textCapitalization: TextCapitalization.sentences,
@@ -266,8 +271,8 @@ class _ServiceAddPageState extends State<ServiceAddPage> {
                               border: UnderlineInputBorder(
                                   borderSide:
                                       BorderSide(color: Colors.blue, width: 2)),
-                              hintText: 'Name',
-                              labelText: "Name"),
+                              hintText: 'Year Of Experience',
+                              labelText: "Year Of Experience"),
                         ),
                         TextField(
                           textCapitalization: TextCapitalization.sentences,
@@ -314,8 +319,8 @@ class _ServiceAddPageState extends State<ServiceAddPage> {
                               border: UnderlineInputBorder(
                                   borderSide:
                                       BorderSide(color: Colors.blue, width: 2)),
-                              hintText: 'Quantity',
-                              labelText: "Quantity"),
+                              hintText: 'Email',
+                              labelText: "Email"),
                         ),
                         TextField(
                           textCapitalization: TextCapitalization.sentences,
@@ -331,15 +336,49 @@ class _ServiceAddPageState extends State<ServiceAddPage> {
                               border: UnderlineInputBorder(
                                   borderSide:
                                       BorderSide(color: Colors.blue, width: 2)),
-                              hintText: 'Description',
-                              labelText: "Description"),
+                              hintText: 'Area Of Expertise',
+                              labelText: "Area Of Expertise"),
+                        ),
+                        TextField(
+                          textCapitalization: TextCapitalization.sentences,
+                          controller: fee,
+                          style: TextStyle(fontSize: 14),
+                          minLines: 2,
+                          maxLines: 5,
+                          decoration: InputDecoration(
+                              enabledBorder: UnderlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.blue, width: 2)),
+                              contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 3),
+                              border: UnderlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.blue, width: 2)),
+                              hintText: 'Fee',
+                              labelText: "fee"),
+                        ),
+                        TextField(
+                          textCapitalization: TextCapitalization.sentences,
+                          controller: city,
+                          style: TextStyle(fontSize: 14),
+                          minLines: 2,
+                          maxLines: 5,
+                          decoration: InputDecoration(
+                              enabledBorder: UnderlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.blue, width: 2)),
+                              contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 3),
+                              border: UnderlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.blue, width: 2)),
+                              hintText: 'City',
+                              labelText: "City"),
                         ),
                         Container(
                           margin: EdgeInsets.only(top: 20),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("Upload Images of Medicine",
+                              Text("Upload Images of Degree",
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20)),

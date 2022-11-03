@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:law_consultation_app/screens/create_lawyer_profile.dart';
+import 'package:law_consultation_app/screens/main_categories_screen.dart';
+import 'package:law_consultation_app/screens/more_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/login_screen.dart';
 import 'screens/reset_screen.dart';
@@ -71,9 +73,10 @@ class _RoutesState extends State<Routes> {
         '/signup': (context) => SignUpScreen(),
         '/reset': (context) => ResetScreen(),
         '/home': (context) => HomeScreen(),
-
-         '/addService': (context) => ServiceAddPage(
-               initialized: _initialized,
+        '/more': (context) => MoreScreen(),
+        '/categories': (context) => MainCategoriesScreen(),
+        '/createLawyerProfile': (context) => CreateLawyerProfile(
+              initialized: _initialized,
               error: _error,
             ),
       },
