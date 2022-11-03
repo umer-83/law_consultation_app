@@ -7,9 +7,11 @@ class CategoryWidget extends StatelessWidget {
     Key? key,
     required this.cardTitle,
     required this.onTab,
+    required this.picture,
   }) : super(key: key);
   final String cardTitle;
   final VoidCallback onTab;
+  final String picture;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +33,7 @@ class CategoryWidget extends StatelessWidget {
                 Row(
                   children: [
                     Image.asset(
-                      'assets/images/AppLogo.png',
+                      picture,
                       height: 60,
                       width: 60,
                     ),

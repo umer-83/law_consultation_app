@@ -1,14 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class LawyerPortfolioDetails extends StatefulWidget {
   final DocumentSnapshot documentSnapshot;

@@ -2,8 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:law_consultation_app/screens/about_us_screen.dart';
+import 'package:law_consultation_app/screens/civil_law.dart';
 import 'package:law_consultation_app/screens/contact_us_screen.dart';
 import 'package:law_consultation_app/screens/create_lawyer_profile.dart';
+import 'package:law_consultation_app/screens/criminal_law.dart';
+import 'package:law_consultation_app/screens/family_law.dart';
+import 'package:law_consultation_app/screens/labour_law.dart';
 import 'package:law_consultation_app/screens/lawyers_list.dart';
 import 'package:law_consultation_app/screens/more_screen.dart';
 import 'screens/home_screen.dart';
@@ -77,10 +81,14 @@ class _RoutesState extends State<Routes> {
         '/reset': (context) => ResetScreen(),
         '/home': (context) => HomeScreen(),
         '/more': (context) => MoreScreen(),
+        '/civillaw': (context) => CivilLawScreen(),
+        '/criminallaw': (context) => CriminalLawScreen(),
+        '/familylaw': (context) => FamilyLawScreen(),
+        '/labourlaw': (context) => LabourLawScreen(),
         '/aboutus': (context) => AboutUs(),
         '/contactus': (context) => ContactUs(),
         '/lawyerslist': (context) => LawyersListScreen(),
-        '/lawyerscategory': (context) => LawCategories(),
+        '/lawcategory': (context) => LawCategories(),
         '/createLawyerProfile': (context) => CreateLawyerProfile(
               initialized: _initialized,
               error: _error,

@@ -1,6 +1,7 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:law_consultation_app/widgets/category_widget.dart';
-import 'package:law_consultation_app/widgets/more_card_widget.dart';
 
 class LawCategories extends StatefulWidget {
   const LawCategories({Key? key}) : super(key: key);
@@ -38,14 +39,37 @@ class _LawCategoriesState extends State<LawCategories> {
       ),
       body: Column(
         children: [
+          SizedBox(height: 30),
           CategoryWidget(
-            cardTitle: "Property Law",
-            onTab: () {},
+            cardTitle: "Criminal Law",
+            onTab: () {
+              Navigator.pushReplacementNamed(context, '/criminallaw');
+            },
+            picture: 'assets/images/criminallaw.png',
           ),
-          SizedBox(height: 10),
+          SizedBox(height: 12),
+          CategoryWidget(
+            cardTitle: "Civil Law",
+            onTab: () {
+              Navigator.pushReplacementNamed(context, '/civillaw');
+            },
+            picture: 'assets/images/civillaw.png',
+          ),
+          SizedBox(height: 12),
           CategoryWidget(
             cardTitle: "Family Law",
-            onTab: () {},
+            onTab: () {
+              Navigator.pushReplacementNamed(context, '/familylaw');
+            },
+            picture: 'assets/images/familylaw.png',
+          ),
+          SizedBox(height: 12),
+          CategoryWidget(
+            cardTitle: "Labour Law",
+            onTab: () {
+              Navigator.pushReplacementNamed(context, '/labourlaw');
+            },
+            picture: 'assets/images/labourlaw.png',
           ),
         ],
       ),
