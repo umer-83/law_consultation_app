@@ -1,13 +1,18 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class LawyerPortfolioDetails extends StatefulWidget {
   final DocumentSnapshot documentSnapshot;
+
   const LawyerPortfolioDetails({
     Key? key,
     required this.documentSnapshot,
@@ -20,8 +25,16 @@ class LawyerPortfolioDetails extends StatefulWidget {
 class _LawyerPortfolioDetailsState extends State<LawyerPortfolioDetails> {
   @override
   Widget build(BuildContext context) {
+    var userName;
+
+    // FirebaseFirestore.instance
+    //     .collection('users')
+    //     .where('uid', isEqualTo: FirebaseAuth.instance.currentUser)
+    //     .get().then((QuerySnapshot snapshot) => snapshot.docs['']);
+
+    var docId = widget.documentSnapshot.reference.id.toString();
     return Scaffold(
-      backgroundColor: Color(0xFFE9E6E6),
+        backgroundColor: Color(0xFFFFFFFF),
         body: SingleChildScrollView(
           child: SafeArea(
               child: Column(mainAxisSize: MainAxisSize.max, children: [
@@ -71,7 +84,7 @@ class _LawyerPortfolioDetailsState extends State<LawyerPortfolioDetails> {
                         style: TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.bold,
-                          color: Color(0xff4F7344),
+                          color: Color(0xff8C52FF),
                         )),
                     SizedBox(
                       height: 12,
@@ -87,7 +100,7 @@ class _LawyerPortfolioDetailsState extends State<LawyerPortfolioDetails> {
                     Text(widget.documentSnapshot['email'],
                         style: TextStyle(
                           fontSize: 18,
-                          color: Color(0xff4F7344),
+                          color: Color(0xff8C52FF),
                         )),
                     SizedBox(
                       height: 12,
@@ -103,7 +116,7 @@ class _LawyerPortfolioDetailsState extends State<LawyerPortfolioDetails> {
                     Text(widget.documentSnapshot['fee'],
                         style: TextStyle(
                           fontSize: 18,
-                          color: Color(0xff4F7344),
+                          color: Color(0xff8C52FF),
                         )),
                     SizedBox(
                       height: 12,
@@ -208,15 +221,119 @@ class _LawyerPortfolioDetailsState extends State<LawyerPortfolioDetails> {
                               padding: MaterialStateProperty.all<EdgeInsets>(
                                   EdgeInsets.all(10)),
                               backgroundColor: MaterialStateProperty.all<Color>(
-                                Color(0xff4F7344),
-                              ),
+                                  Color(0xff8C52FF)),
                               shape: MaterialStateProperty.all(
                                   RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(30.0),
                                       side: BorderSide(
-                                        color: Color(0xff4F7344),
-                                      )))),
-                          onPressed: () {}),
+                                          color: Color(0xff8C52FF))))),
+                          onPressed: () {
+                            showModalBottomSheet<void>(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return SingleChildScrollView(
+                                  child: Container(
+                                    height: 400,
+                                    color: Colors.white,
+                                    child: Center(
+                                        child: Padding(
+                                      padding:
+                                          EdgeInsets.fromLTRB(20, 30, 20, 20),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: <Widget>[
+                                          const Text(
+                                              'Please provide your opinion about the Brand',
+                                              style: TextStyle(
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.w600)),
+                                          SizedBox(
+                                            height: 7,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              RatingBar.builder(
+                                                initialRating: 3,
+                                                minRating: 1,
+                                                direction: Axis.horizontal,
+                                                allowHalfRating: true,
+                                                itemCount: 5,
+                                                itemPadding:
+                                                    EdgeInsets.symmetric(
+                                                        horizontal: 4.0),
+                                                itemBuilder: (context, _) =>
+                                                    Icon(
+                                                  Icons.star,
+                                                  color: Colors.amber,
+                                                ),
+                                                onRatingUpdate: (rating) {},
+                                              )
+                                            ],
+                                          ),
+                                          SizedBox(height: 8),
+                                          TextField(
+                                            style: TextStyle(fontSize: 14),
+                                            minLines: 5,
+                                            maxLines: 6,
+                                            decoration: InputDecoration(
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: Colors.blue,
+                                                            width: 2)),
+                                                contentPadding:
+                                                    EdgeInsets.fromLTRB(
+                                                        0, 15, 15, 3),
+                                                border: OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                        color: Colors.blue,
+                                                        width: 2)),
+                                                hintText: 'Write your review',
+                                                labelText: ""),
+                                          ),
+                                          SizedBox(
+                                            height: 50,
+                                          ),
+                                          Container(
+                                              width: double.maxFinite,
+                                              child: ElevatedButton(
+                                                  onPressed: () {
+                                                    //Navigator.pop(context),
+                                                    FirebaseFirestore.instance
+                                                        .collection("lawyers")
+                                                        .doc(docId)
+                                                        .update({
+                                                      "review": FieldValue
+                                                          .arrayUnion([
+                                                        "daaaaata",
+                                                      ])
+                                                    });
+                                                  },
+                                                  child: const Text(
+                                                      'Submit Review'),
+                                                  style: ButtonStyle(
+                                                      padding: MaterialStateProperty.all<
+                                                              EdgeInsets>(
+                                                          EdgeInsets.all(10)),
+                                                      backgroundColor:
+                                                          MaterialStateProperty
+                                                              .all<Color>(
+                                                                  Colors.blue),
+                                                      shape: MaterialStateProperty.all(
+                                                          RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius.circular(30.0),
+                                                              side: BorderSide(color: Colors.blue)))))),
+                                        ],
+                                      ),
+                                    )),
+                                  ),
+                                );
+                              },
+                            );
+                          }),
                     )
                   ],
                 ))

@@ -1,5 +1,6 @@
 // ignore_for_file: missing_return, prefer_const_constructors
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../typography/semibold_green.dart';
@@ -62,7 +63,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ],
                 ),
-               
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 60, 0, 0),
                   child: Form(
@@ -217,6 +217,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                           password: passwordTextController.text)
                                       .then(
                                     (value) {
+                                      FirebaseFirestore.instance
+                                          .collection('users')
+                                          .add({
+                                        'email': emailTextController.text,
+                                        'username': userNameTextController.text,
+                                        'uid': FirebaseAuth
+                                            .instance.currentUser!.uid
+                                      });
                                       print("Created New Account");
                                       FocusScope.of(context).unfocus();
                                       Navigator.pushReplacementNamed(

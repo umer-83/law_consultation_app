@@ -42,6 +42,7 @@ class _CreateLawyerProfileState extends State<CreateLawyerProfile> {
   TextEditingController fee = TextEditingController();
 
   bool avail = true;
+  List rev = [''];
 
   Future<void> SelectImageFromGallery() async {
     final pickedImage = await picker.getImage(source: ImageSource.gallery);
@@ -71,7 +72,7 @@ class _CreateLawyerProfileState extends State<CreateLawyerProfile> {
     var addres = address.text;
     var quant = quanti.text;
     var feee = fee.text;
-    var cityy =city.text;
+    var cityy = city.text;
     setState(
       () {
         Future.delayed(
@@ -112,7 +113,7 @@ class _CreateLawyerProfileState extends State<CreateLawyerProfile> {
           'yofexp': service,
           'city': cityy,
           'fee': feee,
-          
+          'review': rev,
         })
         .then((value) => print('User Added'))
         .catchError((error) => print('Failed to Add user: $error'));
