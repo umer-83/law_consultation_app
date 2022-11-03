@@ -3,7 +3,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:law_consultation_app/widgets/lawyer_widget.dart';
-
 import '../widgets/bottom_navigation_bar.dart';
 
 class LawyersListScreen extends StatefulWidget {

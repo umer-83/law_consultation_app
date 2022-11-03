@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:law_consultation_app/screens/lawyer_portfolio_details.dart';
-
 import 'lawyer_profile_card.dart';
 
 Widget lawyerWidget(lawStream) {

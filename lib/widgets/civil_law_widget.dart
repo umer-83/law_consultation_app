@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:law_consultation_app/screens/lawyer_portfolio_details.dart';
-import 'lawyer_profile_card.dart';
+import 'package:law_consultation_app/widgets/sub_law_category.dart';
 
 Widget civilWidget(lawStream) {
   return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
@@ -24,12 +24,10 @@ Widget civilWidget(lawStream) {
         itemBuilder: (context, index) {
           final DocumentSnapshot documentSnap = snapshot.data!.docs[index];
 
-          return (LawyerProfileCard(
-            lawyerName: '${documentSnap['name'].toString()}',
-            // consulationFee: 'Fee: ${documentSnap['email'].toString()}',
-            city: documentSnap['city'].toString(),
-            experience: documentSnap['yofexp'].toString(),
-            profilePicture: documentSnap['cover_image'].toString(),
+          return (
+            SubLawCategoryCard(
+            lawTitle: documentSnap['name'].toString(),
+            actNum: documentSnap['name'].toString(),
             onTab: () {
               FocusScope.of(context).unfocus();
               Navigator.push(
@@ -38,7 +36,8 @@ Widget civilWidget(lawStream) {
                       builder: (BuildContext context) => LawyerPortfolioDetails(
                           documentSnapshot: documentSnap)));
             },
-          ));
+          )
+          );
         },
       );
     },
