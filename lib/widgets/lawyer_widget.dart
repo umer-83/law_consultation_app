@@ -27,7 +27,9 @@ Widget lawyerWidget(lawStream) {
 
           return (LawyerProfileCard(
             lawyerName: '${documentSnap['name'].toString()}',
-            consulationFee: 'Fee: ${documentSnap['email'].toString()}',
+            // consulationFee: 'Fee: ${documentSnap['email'].toString()}',
+            city: documentSnap['city'].toString(),
+            experience: documentSnap['yofexp'].toString(),
             profilePicture: documentSnap['cover_image'].toString(),
             onTab: () {
               FocusScope.of(context).unfocus();

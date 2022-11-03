@@ -77,7 +77,7 @@ class _CreateLawyerProfileState extends State<CreateLawyerProfile> {
         Future.delayed(
           Duration(seconds: 10),
           () {
-            Navigator.pushReplacementNamed(context, '/donation');
+            Navigator.pushReplacementNamed(context, '/lawyerslist');
           },
         );
       },
@@ -147,7 +147,7 @@ class _CreateLawyerProfileState extends State<CreateLawyerProfile> {
     if (index == 0) {
       Navigator.pushReplacementNamed(context, '/home');
     } else if (index == 2) {
-      Navigator.pushReplacementNamed(context, '/categories');
+      Navigator.pushReplacementNamed(context, '/lawyerslist');
     } else if (index == 3) {
       Navigator.pushReplacementNamed(context, '/more');
     }
@@ -454,14 +454,14 @@ class _CreateLawyerProfileState extends State<CreateLawyerProfile> {
                                   style: ButtonStyle(
                                     backgroundColor:
                                         MaterialStateProperty.all<Color>(
-                                      Color(0xff8C52FF),
+                                      Color(0xff4F7344),
                                     ),
                                     shape: MaterialStateProperty.all(
                                       RoundedRectangleBorder(
                                         borderRadius:
                                             BorderRadius.circular(12.0),
                                         side: const BorderSide(
-                                          color: Color(0xff8C52FF),
+                                          color: Color(0xff4F7344),
                                         ),
                                       ),
                                     ),

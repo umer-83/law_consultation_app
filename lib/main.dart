@@ -1,10 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:law_consultation_app/screens/about_us_screen.dart';
+import 'package:law_consultation_app/screens/contact_us_screen.dart';
 import 'package:law_consultation_app/screens/create_lawyer_profile.dart';
-import 'package:law_consultation_app/screens/main_categories_screen.dart';
+import 'package:law_consultation_app/screens/lawyers_list.dart';
 import 'package:law_consultation_app/screens/more_screen.dart';
 import 'screens/home_screen.dart';
+import 'screens/law_categories.dart';
 import 'screens/login_screen.dart';
 import 'screens/reset_screen.dart';
 import 'screens/signup_screen.dart';
@@ -74,7 +77,10 @@ class _RoutesState extends State<Routes> {
         '/reset': (context) => ResetScreen(),
         '/home': (context) => HomeScreen(),
         '/more': (context) => MoreScreen(),
-        '/categories': (context) => MainCategoriesScreen(),
+        '/aboutus': (context) => AboutUs(),
+        '/contactus': (context) => ContactUs(),
+        '/lawyerslist': (context) => LawyersListScreen(),
+        '/lawyerscategory': (context) => LawCategories(),
         '/createLawyerProfile': (context) => CreateLawyerProfile(
               initialized: _initialized,
               error: _error,

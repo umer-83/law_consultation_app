@@ -3,9 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class LawyerPortfolioDetails extends StatefulWidget {
@@ -23,7 +21,7 @@ class _LawyerPortfolioDetailsState extends State<LawyerPortfolioDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color(0xFFFFFFFF),
+      backgroundColor: Color(0xFFE9E6E6),
         body: SingleChildScrollView(
           child: SafeArea(
               child: Column(mainAxisSize: MainAxisSize.max, children: [
@@ -73,7 +71,7 @@ class _LawyerPortfolioDetailsState extends State<LawyerPortfolioDetails> {
                         style: TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.bold,
-                          color: Color(0xff8C52FF),
+                          color: Color(0xff4F7344),
                         )),
                     SizedBox(
                       height: 12,
@@ -89,9 +87,9 @@ class _LawyerPortfolioDetailsState extends State<LawyerPortfolioDetails> {
                     Text(widget.documentSnapshot['email'],
                         style: TextStyle(
                           fontSize: 18,
-                          color: Color(0xff8C52FF),
+                          color: Color(0xff4F7344),
                         )),
-                         SizedBox(
+                    SizedBox(
                       height: 12,
                     ),
                     Text(
@@ -105,7 +103,7 @@ class _LawyerPortfolioDetailsState extends State<LawyerPortfolioDetails> {
                     Text(widget.documentSnapshot['fee'],
                         style: TextStyle(
                           fontSize: 18,
-                          color: Color(0xff8C52FF),
+                          color: Color(0xff4F7344),
                         )),
                     SizedBox(
                       height: 12,
@@ -115,14 +113,13 @@ class _LawyerPortfolioDetailsState extends State<LawyerPortfolioDetails> {
                             fontSize: 20, fontWeight: FontWeight.w600)),
                     SizedBox(height: 8),
                     Container(
-                      child: Text(
-                          widget.documentSnapshot['expert'].toString(),
+                      child: Text(widget.documentSnapshot['expert'].toString(),
                           style: TextStyle(fontSize: 16)),
                     ),
                     SizedBox(
                       height: 12,
                     ),
-                      SizedBox(
+                    SizedBox(
                       height: 12,
                     ),
                     Text("Years Of Experience",
@@ -130,15 +127,13 @@ class _LawyerPortfolioDetailsState extends State<LawyerPortfolioDetails> {
                             fontSize: 20, fontWeight: FontWeight.w600)),
                     SizedBox(height: 8),
                     Container(
-                      child: Text(
-                          widget.documentSnapshot['yofexp'].toString(),
+                      child: Text(widget.documentSnapshot['yofexp'].toString(),
                           style: TextStyle(fontSize: 16)),
                     ),
                     SizedBox(
                       height: 12,
                     ),
-
-                        SizedBox(
+                    SizedBox(
                       height: 12,
                     ),
                     Text("City",
@@ -146,14 +141,12 @@ class _LawyerPortfolioDetailsState extends State<LawyerPortfolioDetails> {
                             fontSize: 20, fontWeight: FontWeight.w600)),
                     SizedBox(height: 8),
                     Container(
-                      child: Text(
-                          widget.documentSnapshot['city'].toString(),
+                      child: Text(widget.documentSnapshot['city'].toString(),
                           style: TextStyle(fontSize: 16)),
                     ),
                     SizedBox(
                       height: 12,
                     ),
-                  
                     Text("Lawyer Contact",
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.w500)),
@@ -215,12 +208,14 @@ class _LawyerPortfolioDetailsState extends State<LawyerPortfolioDetails> {
                               padding: MaterialStateProperty.all<EdgeInsets>(
                                   EdgeInsets.all(10)),
                               backgroundColor: MaterialStateProperty.all<Color>(
-                                  Color(0xff8C52FF)),
+                                Color(0xff4F7344),
+                              ),
                               shape: MaterialStateProperty.all(
                                   RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(30.0),
                                       side: BorderSide(
-                                          color: Color(0xff8C52FF))))),
+                                        color: Color(0xff4F7344),
+                                      )))),
                           onPressed: () {}),
                     )
                   ],

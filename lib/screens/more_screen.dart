@@ -16,7 +16,7 @@ class MoreScreen extends StatelessWidget {
       } else if (index == 1) {
         Navigator.pushReplacementNamed(context, '/createLawyerProfile');
       } else if (index == 2) {
-        Navigator.pushReplacementNamed(context, '/categories');
+        Navigator.pushReplacementNamed(context, '/lawyerslist');
       }
     }
 
@@ -50,17 +50,17 @@ class MoreScreen extends StatelessWidget {
             SizedBox(height: 30),
             MoreCardWidget(
               cardTitle: "About Us",
-              iconData: Icons.location_city_outlined,
+              iconData: Icons.web,
               onTab: () {
-                // Navigator.pushReplacementNamed(context, '/shortage');
+                Navigator.pushReplacementNamed(context, '/aboutus');
               },
             ),
             SizedBox(height: 10),
             MoreCardWidget(
               cardTitle: "Contact Us",
-              iconData: Icons.location_city_outlined,
+              iconData: Icons.call,
               onTab: () {
-                // Navigator.pushReplacementNamed(context, '/shortage');
+                Navigator.pushReplacementNamed(context, '/contactus');
               },
             ),
             SizedBox(height: 10),
