@@ -78,7 +78,7 @@ class _LawyerPortfolioDetailsState extends State<LawyerPortfolioDetails> {
                         style: TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.bold,
-                          color: Color(0xff8C52FF),
+                          color: Color(0xff4F7344),
                         )),
                     SizedBox(
                       height: 12,
@@ -94,7 +94,7 @@ class _LawyerPortfolioDetailsState extends State<LawyerPortfolioDetails> {
                     Text(widget.documentSnapshot['email'],
                         style: TextStyle(
                           fontSize: 18,
-                          color: Color(0xff8C52FF),
+                          color: Color(0xff4F7344),
                         )),
                     SizedBox(
                       height: 12,
@@ -110,7 +110,7 @@ class _LawyerPortfolioDetailsState extends State<LawyerPortfolioDetails> {
                     Text(widget.documentSnapshot['fee'],
                         style: TextStyle(
                           fontSize: 18,
-                          color: Color(0xff8C52FF),
+                          color: Color(0xff4F7344),
                         )),
                     SizedBox(
                       height: 12,
@@ -208,14 +208,14 @@ class _LawyerPortfolioDetailsState extends State<LawyerPortfolioDetails> {
                       height: 50,
                       child: ElevatedButton(
                           child: const Text(
-                            'Contact Me!',
+                            'Write a Review!',
                             style: TextStyle(fontSize: 20),
                           ),
                           style: ButtonStyle(
                               padding: MaterialStateProperty.all<EdgeInsets>(
                                   EdgeInsets.all(10)),
                               backgroundColor: MaterialStateProperty.all<Color>(
-                                  Color(0xff8C52FF)),
+                                  Color(0xff4F7344)),
                               shape: MaterialStateProperty.all(
                                   RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(30.0),
@@ -275,7 +275,8 @@ class _LawyerPortfolioDetailsState extends State<LawyerPortfolioDetails> {
                                                 enabledBorder:
                                                     OutlineInputBorder(
                                                         borderSide: BorderSide(
-                                                            color: Colors.blue,
+                                                            color: Color(
+                                                                0xff4F7344),
                                                             width: 2)),
                                                 contentPadding:
                                                     EdgeInsets.fromLTRB(
@@ -294,7 +295,7 @@ class _LawyerPortfolioDetailsState extends State<LawyerPortfolioDetails> {
                                               width: double.maxFinite,
                                               child: ElevatedButton(
                                                   onPressed: () {
-                                                    //Navigator.pop(context),
+                                                    Navigator.pop(context);
                                                     FirebaseFirestore.instance
                                                         .collection("lawyers")
                                                         .doc(docId)
@@ -311,15 +312,15 @@ class _LawyerPortfolioDetailsState extends State<LawyerPortfolioDetails> {
                                                       padding: MaterialStateProperty.all<
                                                               EdgeInsets>(
                                                           EdgeInsets.all(10)),
-                                                      backgroundColor:
-                                                          MaterialStateProperty
-                                                              .all<Color>(
-                                                                  Colors.blue),
+                                                      backgroundColor: MaterialStateProperty.all<Color>(
+                                                          Color(0xff4F7344)),
                                                       shape: MaterialStateProperty.all(
                                                           RoundedRectangleBorder(
                                                               borderRadius:
-                                                                  BorderRadius.circular(30.0),
-                                                              side: BorderSide(color: Colors.blue)))))),
+                                                                  BorderRadius.circular(
+                                                                      30.0),
+                                                              side: BorderSide(
+                                                                  color: Colors.blue)))))),
                                         ],
                                       ),
                                     )),

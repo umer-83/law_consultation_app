@@ -19,8 +19,8 @@ class SquareCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTab,
       child: Container(
-        width: 170,
-        height: 170,
+        width: 160,
+        height: 160,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(12),

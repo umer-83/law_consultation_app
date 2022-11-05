@@ -13,7 +13,7 @@ class CriminalLawScreen extends StatefulWidget {
 
 class _CriminalLawScreenState extends State<CriminalLawScreen> {
   Stream lawStream =
-      FirebaseFirestore.instance.collection('lawyers').snapshots();
+      FirebaseFirestore.instance.collection('criminal').snapshots();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,7 +56,7 @@ class _CriminalLawScreenState extends State<CriminalLawScreen> {
                 mainAxisSize: MainAxisSize.max,
                 children: const [
                   Text(
-                    'Find lawyer here!',
+                    'Find law here!',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -76,9 +76,11 @@ class _CriminalLawScreenState extends State<CriminalLawScreen> {
                         setState(() {
                           String searchKey = value;
                           lawStream = FirebaseFirestore.instance
-                              .collection('lawyer')
-                              .where('name', isGreaterThanOrEqualTo: searchKey)
-                              .where('name', isLessThan: searchKey + 'z')
+                              .collection('criminal')
+                              .where('title',
+                                  isGreaterThanOrEqualTo:
+                                      searchKey.toUpperCase())
+                              .where('title', isLessThan: searchKey + '\uf8ff')
                               .snapshots();
                         });
                       },
@@ -93,7 +95,7 @@ class _CriminalLawScreenState extends State<CriminalLawScreen> {
                           color: Color(0xff4F7344),
                         ),
                         contentPadding: const EdgeInsets.fromLTRB(15, 8, 15, 8),
-                        hintText: 'Search for Civil Law',
+                        hintText: 'Search for Criminal Law',
                         border: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                           borderSide: BorderSide(
@@ -110,6 +112,7 @@ class _CriminalLawScreenState extends State<CriminalLawScreen> {
               Expanded(
                 child: criminalWidget(lawStream),
               ),
+              SizedBox(height: 12),
             ],
           ),
         ),

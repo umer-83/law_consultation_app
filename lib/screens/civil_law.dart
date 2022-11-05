@@ -12,8 +12,7 @@ class CivilLawScreen extends StatefulWidget {
 
 class _CivilLawScreenState extends State<CivilLawScreen> {
   @override
-  Stream lawStream =
-      FirebaseFirestore.instance.collection('lawyers').snapshots();
+  Stream lawStream = FirebaseFirestore.instance.collection('civil').snapshots();
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFE9E6E6),
@@ -75,9 +74,11 @@ class _CivilLawScreenState extends State<CivilLawScreen> {
                         setState(() {
                           String searchKey = value;
                           lawStream = FirebaseFirestore.instance
-                              .collection('lawyer')
-                              .where('name', isGreaterThanOrEqualTo: searchKey)
-                              .where('name', isLessThan: searchKey + 'z')
+                              .collection('civil')
+                              .where('title',
+                                  isGreaterThanOrEqualTo:
+                                      searchKey.toUpperCase())
+                              .where('title', isLessThan: searchKey + '\uf8ff')
                               .snapshots();
                         });
                       },

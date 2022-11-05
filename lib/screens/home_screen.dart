@@ -50,46 +50,42 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Expanded(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Image(
-                    image: AssetImage('assets/images/banner.png'),
-                    width: double.infinity,
-                    height: 200,
-                    fit: BoxFit.cover,
-                  ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image(
+                  image: AssetImage('assets/images/banner.png'),
+                  width: double.infinity,
+                  height: 200,
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
             SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Expanded(
-                child: Row(
-                  children: [
-                    SquareCard(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SquareCard(
+                    onTab: () {
+                      Navigator.pushReplacementNamed(
+                          context, '/createLawyerProfile');
+                    },
+                    title: "Register",
+                    subtitle: "Register here as a lawyer!",
+                    picture: 'assets/images/add.png',
+                  ),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  SquareCard(
                       onTab: () {
-                        Navigator.pushReplacementNamed(
-                            context, '/createLawyerProfile');
+                        Navigator.pushReplacementNamed(context, '/lawyerslist');
                       },
-                      title: "Register",
-                      subtitle: "Register here as a lawyer!",
-                      picture: 'assets/images/add.png',
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    SquareCard(
-                        onTab: () {
-                          Navigator.pushReplacementNamed(
-                              context, '/lawyerslist');
-                        },
-                        title: "Find Lawyer",
-                        subtitle: "Find expert lsawyer here!",
-                        picture: 'assets/images/lawyer.png'),
-                  ],
-                ),
+                      title: "Find Lawyer",
+                      subtitle: "Find expert lsawyer here!",
+                      picture: 'assets/images/lawyer.png'),
+                ],
               ),
             ),
             SizedBox(height: 20),
@@ -100,7 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
               optionImage: 'assets/images/category.png',
               optionSubTitle: "See law categories here!",
               onTab: () {
-                Navigator.pushReplacementNamed(context,'/lawyerscategory');
+                Navigator.pushReplacementNamed(context, '/lawcategory');
               },
             ),
             SizedBox(height: 20),

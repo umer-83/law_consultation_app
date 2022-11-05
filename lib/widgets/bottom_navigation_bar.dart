@@ -41,7 +41,7 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
             ),
             GButton(
               icon: Icons.people,
-              text: 'Categories',
+              text: 'Lawyers',
             ),
             GButton(
               icon: Icons.dehaze,

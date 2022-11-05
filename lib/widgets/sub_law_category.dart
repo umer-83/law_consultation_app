@@ -15,59 +15,61 @@ class SubLawCategoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: GestureDetector(
-        onTap: onTab,
-        child: Container(
-          height: 90,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    Image.asset(
-                      'assets/images/AppLogo.png',
-                      height: 60,
-                      width: 60,
-                    ),
-                    const SizedBox(width: 20),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          lawTitle,
-                          style: const TextStyle(
-                              fontSize: 20,
-                              color: Color(0xff4F7344),
-                              fontWeight: FontWeight.bold),
+    return GestureDetector(
+      onTap: onTab,
+      child: Container(
+        height: 90,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Image.asset(
+                    'assets/images/AppLogo.png',
+                    height: 60,
+                    width: 60,
+                  ),
+                  const SizedBox(width: 20),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        lawTitle.length > 10
+                            ? "${lawTitle.substring(0, 10)}..."
+                            : '${lawTitle}',
+                        style: const TextStyle(
+                            fontSize: 20,
+                            color: Color(0xff4F7344),
+                            fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        actNum.length > 10
+                            ? "${actNum.substring(0, 10)}..."
+                            : '${actNum}',
+                        // 'Act No: $actNum',
+                        style: const TextStyle(
+                          fontSize: 16,
+                          color: Colors.black,
                         ),
-                        const SizedBox(height: 8),
-                        Text(
-                          'Act No: $actNum',
-                          style: const TextStyle(
-                            fontSize: 16,
-                            color: Colors.black,
-                          ),
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-                Icon(
-                  Icons.chevron_right,
-                  size: 30,
-                  color: Color(0xff4F7344),
-                )
-              ],
-            ),
+                      )
+                    ],
+                  ),
+                ],
+              ),
+              Icon(
+                Icons.chevron_right,
+                size: 30,
+                color: Color(0xff4F7344),
+              )
+            ],
           ),
         ),
       ),

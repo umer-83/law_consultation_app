@@ -82,13 +82,15 @@ class _LawyersListScreenState extends State<LawyersListScreen> {
                 children: [
                   Expanded(
                     child: TextFormField(
+                      textCapitalization: TextCapitalization.sentences,
                       onChanged: (value) {
                         setState(() {
+
                           String searchKey = value;
                           lawStream = FirebaseFirestore.instance
-                              .collection('lawyer')
+                              .collection('lawyers')
                               .where('name', isGreaterThanOrEqualTo: searchKey)
-                              .where('name', isLessThan: searchKey + 'z')
+                              .where('name', isLessThan: searchKey + '\uf8ff')
                               .snapshots();
                         });
                       },

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:law_consultation_app/screens/lawyer_portfolio_details.dart';
 import 'package:law_consultation_app/widgets/sub_law_category.dart';
 
+import '../screens/law_desc.dart';
+
 Widget civilWidget(lawStream) {
   return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
     stream: lawStream,
@@ -24,19 +26,26 @@ Widget civilWidget(lawStream) {
         itemBuilder: (context, index) {
           final DocumentSnapshot documentSnap = snapshot.data!.docs[index];
 
-          return (
-            SubLawCategoryCard(
-            lawTitle: documentSnap['name'].toString(),
-            actNum: documentSnap['name'].toString(),
-            onTab: () {
-              FocusScope.of(context).unfocus();
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (BuildContext context) => LawyerPortfolioDetails(
-                          documentSnapshot: documentSnap)));
-            },
-          )
+          return Column(
+            children: [
+              (SubLawCategoryCard(
+                lawTitle: documentSnap['title'].toString(),
+                actNum: documentSnap['actno'].toString(),
+                onTab: () {
+                  FocusScope.of(context).unfocus();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (BuildContext context) =>
+                          LawDetails(documentSnapshot: documentSnap),
+                    ),
+                  );
+                },
+              )),
+              SizedBox(
+                height: 10,
+              )
+            ],
           );
         },
       );

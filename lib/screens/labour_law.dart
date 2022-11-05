@@ -13,7 +13,7 @@ class LabourLawScreen extends StatefulWidget {
 
 class _LabourLawScreenState extends State<LabourLawScreen> {
   Stream lawStream =
-      FirebaseFirestore.instance.collection('lawyers').snapshots();
+      FirebaseFirestore.instance.collection('labour').snapshots();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,9 +76,11 @@ class _LabourLawScreenState extends State<LabourLawScreen> {
                         setState(() {
                           String searchKey = value;
                           lawStream = FirebaseFirestore.instance
-                              .collection('lawyer')
-                              .where('name', isGreaterThanOrEqualTo: searchKey)
-                              .where('name', isLessThan: searchKey + 'z')
+                              .collection('labour')
+                              .where('title',
+                                  isGreaterThanOrEqualTo:
+                                      searchKey.toUpperCase())
+                              .where('title', isLessThan: searchKey + '\uf8ff')
                               .snapshots();
                         });
                       },
@@ -93,7 +95,7 @@ class _LabourLawScreenState extends State<LabourLawScreen> {
                           color: Color(0xff4F7344),
                         ),
                         contentPadding: const EdgeInsets.fromLTRB(15, 8, 15, 8),
-                        hintText: 'Search for Civil Law',
+                        hintText: 'Search for Labour Law',
                         border: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                           borderSide: BorderSide(

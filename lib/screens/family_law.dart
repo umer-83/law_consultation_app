@@ -13,7 +13,7 @@ class FamilyLawScreen extends StatefulWidget {
 
 class _FamilyLawScreenState extends State<FamilyLawScreen> {
   Stream lawStream =
-      FirebaseFirestore.instance.collection('lawyers').snapshots();
+      FirebaseFirestore.instance.collection('family').snapshots();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,9 +76,11 @@ class _FamilyLawScreenState extends State<FamilyLawScreen> {
                         setState(() {
                           String searchKey = value;
                           lawStream = FirebaseFirestore.instance
-                              .collection('lawyer')
-                              .where('name', isGreaterThanOrEqualTo: searchKey)
-                              .where('name', isLessThan: searchKey + 'z')
+                              .collection('family')
+                              .where('title',
+                                  isGreaterThanOrEqualTo:
+                                      searchKey.toUpperCase())
+                              .where('title', isLessThan: searchKey + '\uf8ff')
                               .snapshots();
                         });
                       },
@@ -93,7 +95,7 @@ class _FamilyLawScreenState extends State<FamilyLawScreen> {
                           color: Color(0xff4F7344),
                         ),
                         contentPadding: const EdgeInsets.fromLTRB(15, 8, 15, 8),
-                        hintText: 'Search for Civil Law',
+                        hintText: 'Search for Family Law',
                         border: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                           borderSide: BorderSide(
