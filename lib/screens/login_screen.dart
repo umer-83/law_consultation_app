@@ -37,214 +37,219 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: _scaffoldKey,
-      resizeToAvoidBottomInset: false,
-      backgroundColor: const Color(0xFFF9F9F9),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: 50,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Image(
-                      image: AssetImage('assets/images/AppLogo.png'),
-                      width: 150,
-                      height: 150),
-                ],
-              ),
-              
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 60, 0, 0),
-                child: Form(
-                  key: _formKey,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        TextFormField(
-                          controller: emailTextController,
-                          obscureText: false,
-                          enableSuggestions: true,
-                          autocorrect: !false,
-                          style: const TextStyle(
-                            fontSize: 14,
-                          ),
-                          decoration: const InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(12)),
-                              borderSide: BorderSide(
-                                color: Color(0xff4F7344),
-                                width: 2,
+    return WillPopScope(
+      onWillPop: () async {
+        return false;
+      },
+      child: Scaffold(
+        key: _scaffoldKey,
+        resizeToAvoidBottomInset: false,
+        backgroundColor: const Color(0xFFF9F9F9),
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 50,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Image(
+                        image: AssetImage('assets/images/AppLogo.png'),
+                        width: 150,
+                        height: 150),
+                  ],
+                ),
+                
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 60, 0, 0),
+                  child: Form(
+                    key: _formKey,
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          TextFormField(
+                            controller: emailTextController,
+                            obscureText: false,
+                            enableSuggestions: true,
+                            autocorrect: !false,
+                            style: const TextStyle(
+                              fontSize: 14,
+                            ),
+                            decoration: const InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(12)),
+                                borderSide: BorderSide(
+                                  color: Color(0xff4F7344),
+                                  width: 2,
+                                ),
+                              ),
+                              contentPadding: EdgeInsets.fromLTRB(15, 15, 15, 15),
+                              labelText: 'Email',
+                              prefixIcon: Icon(Icons.mail),
+                              border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(12)),
+                                borderSide: BorderSide(
+                                  color: Color(0xff4F7344),
+                                  width: 2,
+                                ),
                               ),
                             ),
-                            contentPadding: EdgeInsets.fromLTRB(15, 15, 15, 15),
-                            labelText: 'Email',
-                            prefixIcon: Icon(Icons.mail),
-                            border: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(12)),
-                              borderSide: BorderSide(
-                                color: Color(0xff4F7344),
-                                width: 2,
-                              ),
-                            ),
-                          ),
-                          // onSaved: (newValue) => email = newValue,
-                          onChanged: (value) {
-                            if (value.isNotEmpty &&
-                                errors.contains('kEmailNullError')) {
-                              removeError(error: 'kEmailNullError');
-                            } else if (value.isNotEmpty) {
-                              addError(error: 'kInvalidEmailError');
-                              return null;
-                            }
-                          },
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              addError(error: 'kEmailNullError');
-                              removeError(error: 'kInvalidEmailError');
-                              return 'Email is required!';
-                            } else if (value.isNotEmpty) {
-                              addError(error: 'kInvalidEmailError');
-                            }
-                            return null;
-                          },
-                        ),
-                        const SizedBox(height: 20),
-                        TextFormField(
-                          style: const TextStyle(fontSize: 14),
-                          controller: passwordTextController,
-                          obscureText: true,
-                          enableSuggestions: !true,
-                          autocorrect: !true,
-                          decoration: const InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(12)),
-                              borderSide: BorderSide(
-                                color: Color(0xff4F7344),
-                                width: 2,
-                              ),
-                            ),
-                            contentPadding: EdgeInsets.fromLTRB(15, 15, 15, 15),
-                            labelText: 'Password',
-                            prefixIcon: Icon(Icons.lock),
-                            border: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(12)),
-                              borderSide: BorderSide(
-                                color: Color(0xff4F7344),
-                                width: 2,
-                              ),
-                            ),
-                          ),
-
-                          // onSaved: (newValue) => password = newValue,
-                          onChanged: (value) {
-                            if (value.isNotEmpty &&
-                                errors.contains('kPassNullError')) {
-                              removeError(error: 'kPassNullError');
-                            } else if (value.length >= 6) {
-                              removeError(error: 'kShortPassError');
-                            }
-                            // In case a user removed some characters below the threshold, show alert
-                            else if (value.length < 6 && value.isNotEmpty) {
-                              addError(error: 'kShortPassError');
-                            }
-                            return null;
-                          },
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              addError(error: 'kPassNullError');
-                              removeError(error: 'kShortPassError');
-                              return 'Password is required!';
-                            } else if (value.length < 6 && value.isNotEmpty) {
-                              addError(error: 'kShortPassError');
-                              return 'Password must be 6 or > 6 digits.';
-                            }
-                            return null;
-                          },
-                        ),
-                        const SizedBox(height: 40),
-                        SizedBox(
-                          width: double.infinity,
-                          height: 50,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              if (_formKey.currentState!.validate()) {
-                                signin();
+                            // onSaved: (newValue) => email = newValue,
+                            onChanged: (value) {
+                              if (value.isNotEmpty &&
+                                  errors.contains('kEmailNullError')) {
+                                removeError(error: 'kEmailNullError');
+                              } else if (value.isNotEmpty) {
+                                addError(error: 'kInvalidEmailError');
+                                return null;
                               }
                             },
-                            child: Text(
-                              "Login",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                addError(error: 'kEmailNullError');
+                                removeError(error: 'kInvalidEmailError');
+                                return 'Email is required!';
+                              } else if (value.isNotEmpty) {
+                                addError(error: 'kInvalidEmailError');
+                              }
+                              return null;
+                            },
+                          ),
+                          const SizedBox(height: 20),
+                          TextFormField(
+                            style: const TextStyle(fontSize: 14),
+                            controller: passwordTextController,
+                            obscureText: true,
+                            enableSuggestions: !true,
+                            autocorrect: !true,
+                            decoration: const InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(12)),
+                                borderSide: BorderSide(
+                                  color: Color(0xff4F7344),
+                                  width: 2,
+                                ),
+                              ),
+                              contentPadding: EdgeInsets.fromLTRB(15, 15, 15, 15),
+                              labelText: 'Password',
+                              prefixIcon: Icon(Icons.lock),
+                              border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(12)),
+                                borderSide: BorderSide(
+                                  color: Color(0xff4F7344),
+                                  width: 2,
+                                ),
                               ),
                             ),
-                            style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all<Color>(
-                                Color(0xff4F7344),
+    
+                            // onSaved: (newValue) => password = newValue,
+                            onChanged: (value) {
+                              if (value.isNotEmpty &&
+                                  errors.contains('kPassNullError')) {
+                                removeError(error: 'kPassNullError');
+                              } else if (value.length >= 6) {
+                                removeError(error: 'kShortPassError');
+                              }
+                              // In case a user removed some characters below the threshold, show alert
+                              else if (value.length < 6 && value.isNotEmpty) {
+                                addError(error: 'kShortPassError');
+                              }
+                              return null;
+                            },
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                addError(error: 'kPassNullError');
+                                removeError(error: 'kShortPassError');
+                                return 'Password is required!';
+                              } else if (value.length < 6 && value.isNotEmpty) {
+                                addError(error: 'kShortPassError');
+                                return 'Password must be 6 or > 6 digits.';
+                              }
+                              return null;
+                            },
+                          ),
+                          const SizedBox(height: 40),
+                          SizedBox(
+                            width: double.infinity,
+                            height: 50,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                if (_formKey.currentState!.validate()) {
+                                  signin();
+                                }
+                              },
+                              child: Text(
+                                "Login",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                ),
                               ),
-                              shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12.0),
-                                  side: const BorderSide(
-                                    color: Color(0xff4F7344),
+                              style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all<Color>(
+                                  Color(0xff4F7344),
+                                ),
+                                shape: MaterialStateProperty.all(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12.0),
+                                    side: const BorderSide(
+                                      color: Color(0xff4F7344),
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                      const Text(
-                        "Not a User yet?",
-                        style: TextStyle(
-                          color: Colors.black,
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                        const Text(
+                          "Not a User yet?",
+                          style: TextStyle(
+                            color: Colors.black,
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        GestureDetector(
+                          child: SemiBoldGreen(
+                            title: 'Sign Up here',
+                          ),
+                          onTap: () {
+                            Navigator.pushReplacementNamed(context, '/signup');
+                          },
+                        ),
+                      ]),
+                      const SizedBox(height: 10),
+                      Center(
+                        child: GestureDetector(
+                          child: SemiBoldGreen(
+                            title: 'Forget Password?',
+                          ),
+                          onTap: () {
+                            Navigator.pushReplacementNamed(context, '/reset');
+                          },
                         ),
                       ),
-                      const SizedBox(width: 10),
-                      GestureDetector(
-                        child: SemiBoldGreen(
-                          title: 'Sign Up here',
-                        ),
-                        onTap: () {
-                          Navigator.pushReplacementNamed(context, '/signup');
-                        },
-                      ),
-                    ]),
-                    const SizedBox(height: 10),
-                    Center(
-                      child: GestureDetector(
-                        child: SemiBoldGreen(
-                          title: 'Forget Password?',
-                        ),
-                        onTap: () {
-                          Navigator.pushReplacementNamed(context, '/reset');
-                        },
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

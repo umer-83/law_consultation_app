@@ -37,49 +37,90 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: const Color(0xFFF9F9F9),
-      body: SafeArea(
-        child: GestureDetector(
-          onTap: () {
-            FocusScope.of(context).unfocus();
-          },
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(
-                  height: 50,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Image(
-                      image: AssetImage('assets/images/AppLogo.png'),
-                      width: 150,
-                      height: 150,
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 60, 0, 0),
-                  child: Form(
-                    key: _formKey,
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          TextFormField(
-                            controller: userNameTextController,
-                            obscureText: false,
-                            enableSuggestions: !false,
-                            autocorrect: !false,
-                            style: const TextStyle(fontSize: 14),
-                            decoration: const InputDecoration(
+    return WillPopScope(
+      onWillPop: () async {
+        return false;
+      },
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        backgroundColor: const Color(0xFFF9F9F9),
+        body: SafeArea(
+          child: GestureDetector(
+            onTap: () {
+              FocusScope.of(context).unfocus();
+            },
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Image(
+                        image: AssetImage('assets/images/AppLogo.png'),
+                        width: 150,
+                        height: 150,
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 60, 0, 0),
+                    child: Form(
+                      key: _formKey,
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            TextFormField(
+                              controller: userNameTextController,
+                              obscureText: false,
+                              enableSuggestions: !false,
+                              autocorrect: !false,
+                              style: const TextStyle(fontSize: 14),
+                              decoration: const InputDecoration(
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(12)),
+                                    borderSide: BorderSide(
+                                      color: Color(0xff4F7344),
+                                      width: 2,
+                                    ),
+                                  ),
+                                  contentPadding:
+                                      EdgeInsets.fromLTRB(15, 15, 15, 15),
+                                  labelText: 'Username',
+                                  prefixIcon: Icon(
+                                    Icons.person,
+                                  ),
+                                  border: OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(12)),
+                                      borderSide: BorderSide(
+                                        color: Color(0xff4F7344),
+                                        width: 2,
+                                      ))),
+                              // onSaved: (newValue) => usersname = newValue,
+                              validator: (value) {
+                                if (value == null || value.trim().isEmpty) {
+                                  return 'Username is required!';
+                                }
+                              },
+                            ),
+                            const SizedBox(height: 20),
+                            TextFormField(
+                              controller: emailTextController,
+                              obscureText: false,
+                              enableSuggestions: !false,
+                              autocorrect: !false,
+                              style: const TextStyle(fontSize: 14),
+                              decoration: const InputDecoration(
                                 enabledBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(12)),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(12),
+                                  ),
                                   borderSide: BorderSide(
                                     color: Color(0xff4F7344),
                                     width: 2,
@@ -87,207 +128,171 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 ),
                                 contentPadding:
                                     EdgeInsets.fromLTRB(15, 15, 15, 15),
-                                labelText: 'Username',
+                                labelText: 'Email',
                                 prefixIcon: Icon(
-                                  Icons.person,
+                                  Icons.mail,
                                 ),
                                 border: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(12)),
-                                    borderSide: BorderSide(
-                                      color: Color(0xff4F7344),
-                                      width: 2,
-                                    ))),
-                            // onSaved: (newValue) => usersname = newValue,
-                            validator: (value) {
-                              if (value == null || value.trim().isEmpty) {
-                                return 'Username is required!';
-                              }
-                            },
-                          ),
-                          const SizedBox(height: 20),
-                          TextFormField(
-                            controller: emailTextController,
-                            obscureText: false,
-                            enableSuggestions: !false,
-                            autocorrect: !false,
-                            style: const TextStyle(fontSize: 14),
-                            decoration: const InputDecoration(
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(12),
-                                ),
-                                borderSide: BorderSide(
-                                  color: Color(0xff4F7344),
-                                  width: 2,
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(12),
+                                  ),
+                                  borderSide: BorderSide(
+                                    color: Color(0xff4F7344),
+                                    width: 2,
+                                  ),
                                 ),
                               ),
-                              contentPadding:
-                                  EdgeInsets.fromLTRB(15, 15, 15, 15),
-                              labelText: 'Email',
-                              prefixIcon: Icon(
-                                Icons.mail,
-                              ),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(12),
-                                ),
-                                borderSide: BorderSide(
-                                  color: Color(0xff4F7344),
-                                  width: 2,
-                                ),
-                              ),
-                            ),
-                            // onSaved: (newValue) => email = newValue,
-                            validator: (value) {
-                              if (value == null || value.trim().isEmpty) {
-                                return 'Email is required!';
-                              }
-                            },
-                          ),
-                          const SizedBox(height: 20),
-                          TextFormField(
-                            controller: passwordTextController,
-                            obscureText: true,
-                            enableSuggestions: !true,
-                            autocorrect: !true,
-                            style: const TextStyle(fontSize: 14),
-                            decoration: const InputDecoration(
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(12),
-                                ),
-                                borderSide: BorderSide(
-                                  color: Color(0xff4F7344),
-                                  width: 2,
-                                ),
-                              ),
-                              contentPadding:
-                                  EdgeInsets.fromLTRB(15, 15, 15, 15),
-                              labelText: 'Password',
-                              prefixIcon: Icon(
-                                Icons.lock,
-                              ),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(12),
-                                ),
-                                borderSide: BorderSide(
-                                  color: Color(0xff4F7344),
-                                  width: 2,
-                                ),
-                              ),
-                            ),
-                            // onSaved: (newValue) => password = newValue,
-                            onChanged: (value) {
-                              if (value.isNotEmpty &&
-                                  errors.contains('kPassNullError')) {
-                                removeError(error: 'kPassNullError');
-                              } else if (value.length >= 6) {
-                                removeError(error: 'kShortPassError');
-                              }
-                              // In case a user removed some characters below the threshold, show alert
-                              else if (value.length < 6 && value.isNotEmpty) {
-                                addError(error: 'kShortPassError');
-                              }
-                              return null;
-                            },
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                addError(error: 'kPassNullError');
-                                removeError(error: 'kShortPassError');
-                                return 'Password is required!';
-                              } else if (value.length < 6 && value.isNotEmpty) {
-                                addError(error: 'kShortPassError');
-                                return 'Password must be 6 or > 6 digits.';
-                              }
-                              return null;
-                            },
-                          ),
-                          const SizedBox(height: 40),
-                          SizedBox(
-                            width: double.infinity,
-                            height: 50,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                if (_formKey.currentState!.validate()) {
-                                  FirebaseAuth.instance
-                                      .createUserWithEmailAndPassword(
-                                          email: emailTextController.text,
-                                          password: passwordTextController.text)
-                                      .then(
-                                    (value) {
-                                      FirebaseFirestore.instance
-                                          .collection('users')
-                                          .add({
-                                        'email': emailTextController.text,
-                                        'username': userNameTextController.text,
-                                        'uid': FirebaseAuth
-                                            .instance.currentUser!.uid
-                                      });
-                                      print("Created New Account");
-                                      FocusScope.of(context).unfocus();
-                                      Navigator.pushReplacementNamed(
-                                          context, '/home');
-                                    },
-                                  ).onError(
-                                    (error, stackTrace) {
-                                      print("Error \\\${error.toString()}");
-                                    },
-                                  );
+                              // onSaved: (newValue) => email = newValue,
+                              validator: (value) {
+                                if (value == null || value.trim().isEmpty) {
+                                  return 'Email is required!';
                                 }
                               },
-                              child: Text(
-                                "Register",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
+                            ),
+                            const SizedBox(height: 20),
+                            TextFormField(
+                              controller: passwordTextController,
+                              obscureText: true,
+                              enableSuggestions: !true,
+                              autocorrect: !true,
+                              style: const TextStyle(fontSize: 14),
+                              decoration: const InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(12),
+                                  ),
+                                  borderSide: BorderSide(
+                                    color: Color(0xff4F7344),
+                                    width: 2,
+                                  ),
+                                ),
+                                contentPadding:
+                                    EdgeInsets.fromLTRB(15, 15, 15, 15),
+                                labelText: 'Password',
+                                prefixIcon: Icon(
+                                  Icons.lock,
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(12),
+                                  ),
+                                  borderSide: BorderSide(
+                                    color: Color(0xff4F7344),
+                                    width: 2,
+                                  ),
                                 ),
                               ),
-                              style: ButtonStyle(
-                                backgroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                  const Color(0xff4F7344),
+                              // onSaved: (newValue) => password = newValue,
+                              onChanged: (value) {
+                                if (value.isNotEmpty &&
+                                    errors.contains('kPassNullError')) {
+                                  removeError(error: 'kPassNullError');
+                                } else if (value.length >= 6) {
+                                  removeError(error: 'kShortPassError');
+                                }
+                                // In case a user removed some characters below the threshold, show alert
+                                else if (value.length < 6 && value.isNotEmpty) {
+                                  addError(error: 'kShortPassError');
+                                }
+                                return null;
+                              },
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  addError(error: 'kPassNullError');
+                                  removeError(error: 'kShortPassError');
+                                  return 'Password is required!';
+                                } else if (value.length < 6 && value.isNotEmpty) {
+                                  addError(error: 'kShortPassError');
+                                  return 'Password must be 6 or > 6 digits.';
+                                }
+                                return null;
+                              },
+                            ),
+                            const SizedBox(height: 40),
+                            SizedBox(
+                              width: double.infinity,
+                              height: 50,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  if (_formKey.currentState!.validate()) {
+                                    FirebaseAuth.instance
+                                        .createUserWithEmailAndPassword(
+                                            email: emailTextController.text,
+                                            password: passwordTextController.text)
+                                        .then(
+                                      (value) {
+                                        FirebaseFirestore.instance
+                                            .collection('users')
+                                            .add({
+                                          'email': emailTextController.text,
+                                          'username': userNameTextController.text,
+                                          'uid': FirebaseAuth
+                                              .instance.currentUser!.uid
+                                        });
+                                        print("Created New Account");
+                                        FocusScope.of(context).unfocus();
+                                        Navigator.pushReplacementNamed(
+                                            context, '/home');
+                                      },
+                                    ).onError(
+                                      (error, stackTrace) {
+                                        print("Error \\\${error.toString()}");
+                                      },
+                                    );
+                                  }
+                                },
+                                child: Text(
+                                  "Register",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                  ),
                                 ),
-                                shape: MaterialStateProperty.all(
-                                  RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12.0),
-                                    side: const BorderSide(
-                                      color: Color(0xff4F7344),
+                                style: ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                    const Color(0xff4F7344),
+                                  ),
+                                  shape: MaterialStateProperty.all(
+                                    RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12.0),
+                                      side: const BorderSide(
+                                        color: Color(0xff4F7344),
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Text("Already a user?"),
-                          const SizedBox(width: 10),
-                          GestureDetector(
-                            child: SemiBoldGreen(
-                              title: 'Login here',
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text("Already a user?"),
+                            const SizedBox(width: 10),
+                            GestureDetector(
+                              child: SemiBoldGreen(
+                                title: 'Login here',
+                              ),
+                              onTap: () {
+                                Navigator.pushReplacementNamed(context, '/login');
+                              },
                             ),
-                            onTap: () {
-                              Navigator.pushReplacementNamed(context, '/login');
-                            },
-                          ),
-                        ],
-                      )
-                    ],
+                          ],
+                        )
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

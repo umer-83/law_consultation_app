@@ -13,65 +13,70 @@ class LawCategories extends StatefulWidget {
 class _LawCategoriesState extends State<LawCategories> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xFFE9E6E6),
-      appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back,
-            color: Colors.white,
-            size: 30,
+    return WillPopScope(
+      onWillPop: () async {
+        return false;
+      },
+      child: Scaffold(
+        backgroundColor: Color(0xFFE9E6E6),
+        appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+              size: 30,
+            ),
+            onPressed: () {
+              Navigator.pushReplacementNamed(context, '/home');
+            },
           ),
-          onPressed: () {
-            Navigator.pushReplacementNamed(context, '/home');
-          },
+          title: const Text(
+            "Law Categories",
+            style: TextStyle(
+              fontSize: 20,
+              color: Colors.white,
+            ),
+          ),
+          backgroundColor: const Color(0xff4F7344),
+          elevation: 1,
+          centerTitle: true,
         ),
-        title: const Text(
-          "Law Categories",
-          style: TextStyle(
-            fontSize: 20,
-            color: Colors.white,
-          ),
+        body: Column(
+          children: [
+            SizedBox(height: 30),
+            CategoryWidget(
+              cardTitle: "Criminal Law",
+              onTab: () {
+                Navigator.pushReplacementNamed(context, '/criminallaw');
+              },
+              picture: 'assets/images/criminallaw.png',
+            ),
+            SizedBox(height: 12),
+            CategoryWidget(
+              cardTitle: "Civil Law",
+              onTab: () {
+                Navigator.pushReplacementNamed(context, '/civillaw');
+              },
+              picture: 'assets/images/civillaw.png',
+            ),
+            SizedBox(height: 12),
+            CategoryWidget(
+              cardTitle: "Family Law",
+              onTab: () {
+                Navigator.pushReplacementNamed(context, '/familylaw');
+              },
+              picture: 'assets/images/familylaw.png',
+            ),
+            SizedBox(height: 12),
+            CategoryWidget(
+              cardTitle: "Labour Law",
+              onTab: () {
+                Navigator.pushReplacementNamed(context, '/labourlaw');
+              },
+              picture: 'assets/images/labourlaw.png',
+            ),
+          ],
         ),
-        backgroundColor: const Color(0xff4F7344),
-        elevation: 1,
-        centerTitle: true,
-      ),
-      body: Column(
-        children: [
-          SizedBox(height: 30),
-          CategoryWidget(
-            cardTitle: "Criminal Law",
-            onTab: () {
-              Navigator.pushReplacementNamed(context, '/criminallaw');
-            },
-            picture: 'assets/images/criminallaw.png',
-          ),
-          SizedBox(height: 12),
-          CategoryWidget(
-            cardTitle: "Civil Law",
-            onTab: () {
-              Navigator.pushReplacementNamed(context, '/civillaw');
-            },
-            picture: 'assets/images/civillaw.png',
-          ),
-          SizedBox(height: 12),
-          CategoryWidget(
-            cardTitle: "Family Law",
-            onTab: () {
-              Navigator.pushReplacementNamed(context, '/familylaw');
-            },
-            picture: 'assets/images/familylaw.png',
-          ),
-          SizedBox(height: 12),
-          CategoryWidget(
-            cardTitle: "Labour Law",
-            onTab: () {
-              Navigator.pushReplacementNamed(context, '/labourlaw');
-            },
-            picture: 'assets/images/labourlaw.png',
-          ),
-        ],
       ),
     );
   }

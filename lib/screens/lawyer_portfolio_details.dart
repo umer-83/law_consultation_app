@@ -23,13 +23,12 @@ class _LawyerPortfolioDetailsState extends State<LawyerPortfolioDetails> {
   Widget build(BuildContext context) {
     var userName;
 
-    // FirebaseFirestore.instance
-    //     .collection('users')
-    //     .where('uid', isEqualTo: FirebaseAuth.instance.currentUser)
-    //     .get().then((QuerySnapshot snapshot) => snapshot.docs['']);
-
     var docId = widget.documentSnapshot.reference.id.toString();
-    return Scaffold(
+    return WillPopScope(
+      onWillPop: () async {
+        return false;
+      },
+      child: Scaffold(
         backgroundColor: Color(0xFFFFFFFF),
         body: SingleChildScrollView(
           child: SafeArea(
@@ -365,6 +364,8 @@ class _LawyerPortfolioDetailsState extends State<LawyerPortfolioDetails> {
                   ],
                 ))
           ])),
-        ));
+        ),
+      ),
+    );
   }
 }
