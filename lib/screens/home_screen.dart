@@ -27,85 +27,91 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xFFE9E6E6),
-      appBar: AppBar(
-        title: const Text(
-          "E-Law & Consulatation",
-          style: TextStyle(
-            fontSize: 20,
-            color: Colors.white,
-          ),
-        ),
-        backgroundColor: const Color(0xff4F7344),
-        elevation: 1,
-        centerTitle: true,
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 30,
+    return WillPopScope(
+      onWillPop: () async {
+        return false;
+      },
+      child: Scaffold(
+        backgroundColor: Color(0xFFE9E6E6),
+        appBar: AppBar(
+          title: const Text(
+            "E-Law & Consulatation",
+            style: TextStyle(
+              fontSize: 20,
+              color: Colors.white,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Image(
-                  image: AssetImage('assets/images/banner.png'),
-                  width: double.infinity,
-                  height: 200,
-                  fit: BoxFit.cover,
+          ),
+          backgroundColor: const Color(0xff4F7344),
+          elevation: 1,
+          centerTitle: true,
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 30,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image(
+                    image: AssetImage('assets/images/banner.png'),
+                    width: double.infinity,
+                    height: 200,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
-            ),
-            SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SquareCard(
-                    onTab: () {
-                      Navigator.pushReplacementNamed(
-                          context, '/createLawyerProfile');
-                    },
-                    title: "Register",
-                    subtitle: "Register here as a lawyer!",
-                    picture: 'assets/images/add.png',
-                  ),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  SquareCard(
+              SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SquareCard(
                       onTab: () {
-                        Navigator.pushReplacementNamed(context, '/lawyerslist');
+                        Navigator.pushReplacementNamed(
+                            context, '/createLawyerProfile');
                       },
-                      title: "Find Lawyer",
-                      subtitle: "Find expert lsawyer here!",
-                      picture: 'assets/images/lawyer.png'),
-                ],
+                      title: "Register",
+                      subtitle: "Register here as a lawyer!",
+                      picture: 'assets/images/add.png',
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    SquareCard(
+                        onTab: () {
+                          Navigator.pushReplacementNamed(
+                              context, '/lawyerslist');
+                        },
+                        title: "Find Lawyer",
+                        subtitle: "Find expert lsawyer here!",
+                        picture: 'assets/images/lawyer.png'),
+                  ],
+                ),
               ),
-            ),
-            SizedBox(height: 20),
-            LableWidget(title: 'More'),
-            SizedBox(height: 10),
-            OptionCard(
-              optionTitle: "Categories",
-              optionImage: 'assets/images/category.png',
-              optionSubTitle: "See law categories here!",
-              onTab: () {
-                Navigator.pushReplacementNamed(context, '/lawcategory');
-              },
-            ),
-            SizedBox(height: 20),
-          ],
+              SizedBox(height: 20),
+              LableWidget(title: 'More'),
+              SizedBox(height: 10),
+              OptionCard(
+                optionTitle: "Categories",
+                optionImage: 'assets/images/category.png',
+                optionSubTitle: "See law categories here!",
+                onTab: () {
+                  Navigator.pushReplacementNamed(context, '/lawcategory');
+                },
+              ),
+              SizedBox(height: 20),
+            ],
+          ),
         ),
-      ),
-      bottomNavigationBar: BottomNavBarWidget(
-        onChange: onChangeNavigation,
-        cIndex: 0,
+        bottomNavigationBar: BottomNavBarWidget(
+          onChange: onChangeNavigation,
+          cIndex: 0,
+        ),
       ),
     );
   }

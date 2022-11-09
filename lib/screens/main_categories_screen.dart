@@ -19,40 +19,45 @@ class MainCategoriesScreen extends StatelessWidget {
       }
     }
 
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back,
-            color: Colors.white,
-            size: 30,
+    return WillPopScope(
+      onWillPop: () async {
+        return false;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+              size: 30,
+            ),
+            onPressed: () {
+              Navigator.pushReplacementNamed(context, '/home');
+            },
           ),
-          onPressed: () {
-            Navigator.pushReplacementNamed(context, '/home');
-          },
+          title: const Text(
+            "Categories",
+            style: TextStyle(
+              fontSize: 20,
+              color: Colors.white,
+            ),
+          ),
+          backgroundColor: const Color(0xff4F7344),
+          elevation: 1,
+          centerTitle: true,
         ),
-        title: const Text(
-          "Categories",
-          style: TextStyle(
-            fontSize: 20,
-            color: Colors.white,
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            children: [
+              SizedBox(height: 30),
+            ],
           ),
         ),
-        backgroundColor: const Color(0xff4F7344),
-        elevation: 1,
-        centerTitle: true,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          children: [
-            SizedBox(height: 30),
-          ],
+        bottomNavigationBar: BottomNavBarWidget(
+          onChange: onChangeNavigation,
+          cIndex: 2,
         ),
-      ),
-      bottomNavigationBar: BottomNavBarWidget(
-        onChange: onChangeNavigation,
-        cIndex: 2,
       ),
     );
   }

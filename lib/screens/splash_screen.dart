@@ -26,25 +26,30 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xff4F7344),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 5),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                'assets/images/SplashLogo.png',
-                height: 300,
-                width: 300,
-              ),
-              SizedBox(height: 10),
-              const SpinKitThreeBounce(
-                color: Colors.white,
-                size: 30.0,
-              ),
-            ],
+    return WillPopScope(
+      onWillPop: () async {
+        return false;
+      },
+      child: Scaffold(
+        backgroundColor: Color(0xff4F7344),
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 5),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  'assets/images/SplashLogo.png',
+                  height: 300,
+                  width: 300,
+                ),
+                SizedBox(height: 10),
+                const SpinKitThreeBounce(
+                  color: Colors.white,
+                  size: 30.0,
+                ),
+              ],
+            ),
           ),
         ),
       ),
