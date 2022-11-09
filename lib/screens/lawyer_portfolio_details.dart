@@ -204,6 +204,20 @@ class _LawyerPortfolioDetailsState extends State<LawyerPortfolioDetails> {
                       ),
                     ),
                     SizedBox(height: 20),
+                    GridView.count(
+                      primary: false,
+                      shrinkWrap: true,
+                      crossAxisCount: 3,
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10,
+                      children: List.generate(
+                        widget.documentSnapshot['review'].length,
+                        (index) => Text(
+                          widget.documentSnapshot['review'][index].toString(),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 20),
                     Container(
                       width: double.maxFinite,
                       height: 50,
