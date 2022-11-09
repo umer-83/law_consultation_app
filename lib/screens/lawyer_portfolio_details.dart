@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
@@ -17,6 +18,7 @@ class LawyerPortfolioDetails extends StatefulWidget {
 }
 
 class _LawyerPortfolioDetailsState extends State<LawyerPortfolioDetails> {
+  TextEditingController review = TextEditingController();
   @override
   Widget build(BuildContext context) {
     var userName;
@@ -271,6 +273,7 @@ class _LawyerPortfolioDetailsState extends State<LawyerPortfolioDetails> {
                                             style: TextStyle(fontSize: 14),
                                             minLines: 5,
                                             maxLines: 6,
+                                            controller: review,
                                             decoration: InputDecoration(
                                                 enabledBorder:
                                                     OutlineInputBorder(
@@ -291,36 +294,65 @@ class _LawyerPortfolioDetailsState extends State<LawyerPortfolioDetails> {
                                           SizedBox(
                                             height: 50,
                                           ),
-                                          Container(
-                                              width: double.maxFinite,
-                                              child: ElevatedButton(
-                                                  onPressed: () {
-                                                    Navigator.pop(context);
-                                                    FirebaseFirestore.instance
-                                                        .collection("lawyers")
-                                                        .doc(docId)
-                                                        .update({
-                                                      "review": FieldValue
-                                                          .arrayUnion([
-                                                        "daaaaata",
-                                                      ])
-                                                    });
-                                                  },
-                                                  child: const Text(
-                                                      'Submit Review'),
-                                                  style: ButtonStyle(
-                                                      padding: MaterialStateProperty.all<
-                                                              EdgeInsets>(
-                                                          EdgeInsets.all(10)),
-                                                      backgroundColor: MaterialStateProperty.all<Color>(
-                                                          Color(0xff4F7344)),
-                                                      shape: MaterialStateProperty.all(
-                                                          RoundedRectangleBorder(
-                                                              borderRadius:
-                                                                  BorderRadius.circular(
-                                                                      30.0),
-                                                              side: BorderSide(
-                                                                  color: Colors.blue)))))),
+                                          StreamBuilder<
+                                                  QuerySnapshot<
+                                                      Map<String, dynamic>>>(
+                                              stream: FirebaseFirestore.instance
+                                                  .collection('users')
+                                                  .where('uid',
+                                                      isEqualTo: FirebaseAuth
+                                                          .instance
+                                                          .currentUser!
+                                                          .uid)
+                                                  .snapshots(),
+                                              builder: (context, snapshot) {
+                                                if (snapshot.connectionState ==
+                                                    ConnectionState.waiting) {
+                                                  return CircularProgressIndicator();
+                                                }
+                                                var ds = snapshot.data!.docs;
+                                                String usernm = '';
+
+                                                for (int i = 0;
+                                                    i < ds.length;
+                                                    i++) {
+                                                  usernm = (ds[i]['username'])
+                                                      .toString();
+                                                }
+                                                //child:
+                                                return Container(
+                                                    width: double.maxFinite,
+                                                    child: ElevatedButton(
+                                                        onPressed: () {
+                                                          Navigator.pop(
+                                                              context);
+                                                          FirebaseFirestore
+                                                              .instance
+                                                              .collection(
+                                                                  "lawyers")
+                                                              .doc(docId)
+                                                              .update({
+                                                            "review": FieldValue
+                                                                .arrayUnion([
+                                                              "${usernm}: ${review.text}",
+                                                            ])
+                                                          });
+                                                        },
+                                                        child: const Text(
+                                                            'Submit Review'),
+                                                        style: ButtonStyle(
+                                                            padding: MaterialStateProperty.all<
+                                                                    EdgeInsets>(
+                                                                EdgeInsets.all(
+                                                                    10)),
+                                                            backgroundColor:
+                                                                MaterialStateProperty.all<Color>(Color(
+                                                                    0xff4F7344)),
+                                                            shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                                                                borderRadius:
+                                                                    BorderRadius.circular(30.0),
+                                                                side: BorderSide(color: Colors.blue))))));
+                                              }),
                                         ],
                                       ),
                                     )),
