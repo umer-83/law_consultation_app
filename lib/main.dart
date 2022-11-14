@@ -10,6 +10,7 @@ import 'package:law_consultation_app/screens/family_law.dart';
 import 'package:law_consultation_app/screens/labour_law.dart';
 import 'package:law_consultation_app/screens/lawyers_list.dart';
 import 'package:law_consultation_app/screens/more_screen.dart';
+import 'package:law_consultation_app/screens/pak_constitution.dart';
 import 'package:law_consultation_app/screens/user_profile_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/law_categories.dart';
@@ -86,6 +87,7 @@ class _RoutesState extends State<Routes> {
         '/criminallaw': (context) => CriminalLawScreen(),
         '/familylaw': (context) => FamilyLawScreen(),
         '/labourlaw': (context) => LabourLawScreen(),
+        '/pakconstitutuion': (context) => PakConstitutionScreen(),
         '/aboutus': (context) => AboutUs(),
         '/userprofile': (context) => ProfileScreen(),
         '/contactus': (context) => ContactUs(),
