@@ -237,7 +237,7 @@ class _CreateLawyerProfileState extends State<CreateLawyerProfile> {
                                 icon: Icon(
                                   Icons.camera_alt,
                                   size: 34.0,
-                                  color: Colors.blue,
+                                  color: Colors.black,
                                 ),
                               ),
                             )
@@ -254,14 +254,18 @@ class _CreateLawyerProfileState extends State<CreateLawyerProfile> {
                             controller: company_name,
                             style: TextStyle(fontSize: 14),
                             decoration: InputDecoration(
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      color: Colors.black, width: 2.0),
+                                ),
                                 enabledBorder: UnderlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: Colors.blue, width: 2)),
+                                        color: Colors.black, width: 2)),
                                 contentPadding:
                                     EdgeInsets.fromLTRB(0, 15, 15, 3),
                                 border: UnderlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: Colors.blue, width: 2)),
+                                        color: Colors.black, width: 2)),
                                 hintText: 'Lawyer Name',
                                 labelText: "Lawyer  Name"),
                             inputFormatters: [
@@ -278,14 +282,18 @@ class _CreateLawyerProfileState extends State<CreateLawyerProfile> {
                             controller: services,
                             style: TextStyle(fontSize: 14),
                             decoration: InputDecoration(
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      color: Colors.black, width: 2.0),
+                                ),
                                 enabledBorder: UnderlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: Colors.blue, width: 2)),
+                                        color: Colors.black, width: 2)),
                                 contentPadding:
                                     EdgeInsets.fromLTRB(0, 15, 15, 3),
                                 border: UnderlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: Colors.blue, width: 2)),
+                                        color: Colors.black, width: 2)),
                                 hintText: 'Year Of Experience',
                                 labelText: "Year Of Experience"),
                           ),
@@ -295,14 +303,18 @@ class _CreateLawyerProfileState extends State<CreateLawyerProfile> {
                             maxLength: 11,
                             style: TextStyle(fontSize: 14),
                             decoration: InputDecoration(
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      color: Colors.black, width: 2.0),
+                                ),
                                 enabledBorder: UnderlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: Colors.blue, width: 2)),
+                                        color: Colors.black, width: 2)),
                                 contentPadding:
                                     EdgeInsets.fromLTRB(0, 15, 15, 3),
                                 border: UnderlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: Colors.blue, width: 2)),
+                                        color: Colors.black, width: 2)),
                                 hintText: 'Phone Number',
                                 labelText: "Phone Number"),
                             inputFormatters: [
@@ -316,13 +328,17 @@ class _CreateLawyerProfileState extends State<CreateLawyerProfile> {
                             controller: address,
                             style: TextStyle(fontSize: 14),
                             decoration: InputDecoration(
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: const BorderSide(
+                                    color: Colors.black, width: 2.0),
+                              ),
                               enabledBorder: UnderlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Colors.blue, width: 2)),
+                                  borderSide: BorderSide(
+                                      color: Colors.black, width: 2)),
                               contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 3),
                               border: UnderlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Colors.blue, width: 2)),
+                                  borderSide: BorderSide(
+                                      color: Colors.black, width: 2)),
                               hintText: 'Address',
                               labelText: "Address",
                             ),
@@ -334,14 +350,18 @@ class _CreateLawyerProfileState extends State<CreateLawyerProfile> {
                             minLines: 2,
                             maxLines: 5,
                             decoration: InputDecoration(
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      color: Colors.black, width: 2.0),
+                                ),
                                 enabledBorder: UnderlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: Colors.blue, width: 2)),
+                                        color: Colors.black, width: 2)),
                                 contentPadding:
                                     EdgeInsets.fromLTRB(0, 15, 15, 3),
                                 border: UnderlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: Colors.blue, width: 2)),
+                                        color: Colors.black, width: 2)),
                                 hintText: 'Email',
                                 labelText: "Email"),
                           ),
@@ -352,14 +372,18 @@ class _CreateLawyerProfileState extends State<CreateLawyerProfile> {
                             minLines: 2,
                             maxLines: 5,
                             decoration: InputDecoration(
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      color: Colors.black, width: 2.0),
+                                ),
                                 enabledBorder: UnderlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: Colors.blue, width: 2)),
+                                        color: Colors.black, width: 2)),
                                 contentPadding:
                                     EdgeInsets.fromLTRB(0, 15, 15, 3),
                                 border: UnderlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: Colors.blue, width: 2)),
+                                        color: Colors.black, width: 2)),
                                 hintText: 'Area Of Expertise',
                                 labelText: "Area Of Expertise"),
                           ),
@@ -370,16 +394,25 @@ class _CreateLawyerProfileState extends State<CreateLawyerProfile> {
                             minLines: 2,
                             maxLines: 5,
                             decoration: InputDecoration(
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      color: Colors.black, width: 2.0),
+                                ),
                                 enabledBorder: UnderlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: Colors.blue, width: 2)),
+                                        color: Colors.black, width: 2)),
                                 contentPadding:
                                     EdgeInsets.fromLTRB(0, 15, 15, 3),
                                 border: UnderlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: Colors.blue, width: 2)),
+                                        color: Colors.black, width: 2)),
                                 hintText: 'Consultation Fee',
                                 labelText: "Consultation Fee"),
+                            inputFormatters: [
+                              FilteringTextInputFormatter.allow(
+                                RegExp('[0-9]'),
+                              ),
+                            ],
                           ),
                           TextField(
                             textCapitalization: TextCapitalization.sentences,
@@ -388,14 +421,18 @@ class _CreateLawyerProfileState extends State<CreateLawyerProfile> {
                             minLines: 2,
                             maxLines: 5,
                             decoration: InputDecoration(
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      color: Colors.black, width: 2.0),
+                                ),
                                 enabledBorder: UnderlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: Colors.blue, width: 2)),
+                                        color: Colors.black, width: 2)),
                                 contentPadding:
                                     EdgeInsets.fromLTRB(0, 15, 15, 3),
                                 border: UnderlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: Colors.blue, width: 2)),
+                                        color: Colors.black, width: 2)),
                                 hintText: 'City',
                                 labelText: "City"),
                           ),
