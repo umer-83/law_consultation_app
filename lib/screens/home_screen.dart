@@ -102,6 +102,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   Navigator.pushReplacementNamed(context, '/lawcategory');
                 },
               ),
+              SizedBox(height: 10),
+              OptionCard(
+                optionTitle: "Pak Constitution",
+                optionImage: 'assets/images/category.png',
+                optionSubTitle: "See pak constitution here!",
+                onTab: () {
+                  Navigator.pushReplacementNamed(context, '/pakconstitutuion');
+                },
+              ),
               SizedBox(height: 20),
             ],
           ),
