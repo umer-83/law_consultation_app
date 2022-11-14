@@ -62,13 +62,14 @@ class _LawyerPortfolioDetailsState extends State<LawyerPortfolioDetails> {
                         Row(
                           children: [
                             IconButton(
-                                color: Colors.black,
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                icon: Icon(
-                                  Icons.arrow_back_rounded,
-                                ))
+                              color: Colors.black,
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              icon: Icon(
+                                Icons.arrow_back_rounded,
+                              ),
+                            ),
                           ],
                         )
                       ],
@@ -263,31 +264,12 @@ class _LawyerPortfolioDetailsState extends State<LawyerPortfolioDetails> {
                               Text(
                                 "See Reviews!",
                                 style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w400,
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.w500,
                                   color: Colors.white,
                                 ),
                               ),
                               SizedBox(height: 8),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  RatingBar.builder(
-                                    initialRating: 3,
-                                    minRating: 1,
-                                    direction: Axis.horizontal,
-                                    allowHalfRating: true,
-                                    itemCount: 5,
-                                    itemPadding:
-                                        EdgeInsets.symmetric(horizontal: 4.0),
-                                    itemBuilder: (context, _) => Icon(
-                                      Icons.star,
-                                      color: Colors.amber,
-                                    ),
-                                    onRatingUpdate: (rating) {},
-                                  )
-                                ],
-                              ),
                             ],
                           ),
                         ),
@@ -446,7 +428,7 @@ class _LawyerPortfolioDetailsState extends State<LawyerPortfolioDetails> {
                                                   }
                                                   var ds = snapshot.data!.docs;
                                                   String usernm = '';
-                                              
+
                                                   for (int i = 0;
                                                       i < ds.length;
                                                       i++) {
@@ -459,7 +441,7 @@ class _LawyerPortfolioDetailsState extends State<LawyerPortfolioDetails> {
                                                     child: ElevatedButton(
                                                       onPressed: () {
                                                         // Navigator.pop(context);
-                                              
+
                                                         FirebaseFirestore
                                                             .instance
                                                             .collection(
