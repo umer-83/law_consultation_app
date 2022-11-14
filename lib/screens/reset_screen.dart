@@ -87,14 +87,15 @@ class _ResetScreenState extends State<ResetScreen> {
                               margin: EdgeInsets.fromLTRB(20, 10, 20, 150),
                               content: Text(
                                 "No record found.",
-                                style: TextStyle(fontSize: 14, color: Colors.white),
+                                style: TextStyle(
+                                    fontSize: 14, color: Colors.white),
                                 textAlign: TextAlign.center,
                               ),
                               duration: Duration(seconds: 5),
                             ),
                           );
                         }
-            
+
                         if (e.message == 'Given String is empty or null') {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
@@ -104,14 +105,16 @@ class _ResetScreenState extends State<ResetScreen> {
                               margin: EdgeInsets.fromLTRB(20, 10, 20, 150),
                               content: Text(
                                 "E-mail address is required.",
-                                style: TextStyle(fontSize: 14, color: Colors.white),
+                                style: TextStyle(
+                                    fontSize: 14, color: Colors.white),
                                 textAlign: TextAlign.center,
                               ),
                               duration: Duration(seconds: 5),
                             ),
                           );
                         }
-                        if (e.message == 'The email address is badly formatted.') {
+                        if (e.message ==
+                            'The email address is badly formatted.') {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                               backgroundColor: Colors.red,
@@ -120,18 +123,19 @@ class _ResetScreenState extends State<ResetScreen> {
                               margin: EdgeInsets.fromLTRB(20, 10, 20, 150),
                               content: Text(
                                 "Invalid email format!",
-                                style: TextStyle(fontSize: 14, color: Colors.white),
+                                style: TextStyle(
+                                    fontSize: 14, color: Colors.white),
                                 textAlign: TextAlign.center,
                               ),
                               duration: Duration(seconds: 5),
                             ),
                           );
                         }
-            
+
                         print(e.code);
                         print(e.message);
                         emailTextController.clear();
-            // show the snackbar here
+                        // show the snackbar here
                       }
                     },
                     child: Text(

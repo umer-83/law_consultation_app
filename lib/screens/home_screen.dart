@@ -79,16 +79,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       subtitle: "Register here as a lawyer!",
                       picture: 'assets/images/add.png',
                     ),
-                    SizedBox(
-                      width: 5,
-                    ),
+                    SizedBox(width: 5),
                     SquareCard(
                         onTab: () {
                           Navigator.pushReplacementNamed(
                               context, '/lawyerslist');
                         },
                         title: "Find Lawyer",
-                        subtitle: "Find expert lsawyer here!",
+                        subtitle: "Find expert lawyer here!",
                         picture: 'assets/images/lawyer.png'),
                   ],
                 ),

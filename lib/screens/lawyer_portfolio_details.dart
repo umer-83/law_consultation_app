@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -30,6 +30,7 @@ class _LawyerPortfolioDetailsState extends State<LawyerPortfolioDetails> {
       },
       child: Scaffold(
         backgroundColor: Color(0xFFFFFFFF),
+        resizeToAvoidBottomInset: true,
         body: SingleChildScrollView(
           child: SafeArea(
             child: Column(
@@ -343,6 +344,7 @@ class _LawyerPortfolioDetailsState extends State<LawyerPortfolioDetails> {
                                           color: Color(0xff4F7344))))),
                           onPressed: () {
                             showModalBottomSheet<void>(
+                              isScrollControlled: true,
                               context: context,
                               builder: (BuildContext context) {
                                 return SingleChildScrollView(
@@ -444,7 +446,7 @@ class _LawyerPortfolioDetailsState extends State<LawyerPortfolioDetails> {
                                                   }
                                                   var ds = snapshot.data!.docs;
                                                   String usernm = '';
-
+                                              
                                                   for (int i = 0;
                                                       i < ds.length;
                                                       i++) {
@@ -457,7 +459,7 @@ class _LawyerPortfolioDetailsState extends State<LawyerPortfolioDetails> {
                                                     child: ElevatedButton(
                                                       onPressed: () {
                                                         // Navigator.pop(context);
-
+                                              
                                                         FirebaseFirestore
                                                             .instance
                                                             .collection(
@@ -489,9 +491,8 @@ class _LawyerPortfolioDetailsState extends State<LawyerPortfolioDetails> {
                                                         ),
                                                         backgroundColor:
                                                             MaterialStateProperty
-                                                                .all<Color>(
-                                                          Color(0xff4F7344),
-                                                        ),
+                                                                .all<Color>(Color(
+                                                                    0xff4F7344)),
                                                         shape:
                                                             MaterialStateProperty
                                                                 .all(

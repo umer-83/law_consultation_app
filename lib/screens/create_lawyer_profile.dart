@@ -5,9 +5,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:uuid/uuid.dart';
 import 'package:image_picker/image_picker.dart';
-
 import '../widgets/bottom_navigation_bar.dart';
 
 class CreateLawyerProfile extends StatefulWidget {
@@ -264,6 +264,14 @@ class _CreateLawyerProfileState extends State<CreateLawyerProfile> {
                                         color: Colors.blue, width: 2)),
                                 hintText: 'Lawyer Name',
                                 labelText: "Lawyer  Name"),
+                            inputFormatters: [
+                              FilteringTextInputFormatter.allow(
+                                RegExp('[a-zA-Z]'),
+                              ),
+                              FilteringTextInputFormatter.deny(
+                                RegExp('[abFeG]'),
+                              ),
+                            ],
                           ),
                           TextField(
                             textCapitalization: TextCapitalization.sentences,
@@ -297,6 +305,11 @@ class _CreateLawyerProfileState extends State<CreateLawyerProfile> {
                                         color: Colors.blue, width: 2)),
                                 hintText: 'Phone Number',
                                 labelText: "Phone Number"),
+                            inputFormatters: [
+                              FilteringTextInputFormatter.allow(
+                                RegExp('[0-9]'),
+                              ),
+                            ],
                           ),
                           TextField(
                             textCapitalization: TextCapitalization.sentences,

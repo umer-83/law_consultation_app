@@ -32,6 +32,7 @@ class _LawyersListScreenState extends State<LawyersListScreen> {
         return false;
       },
       child: Scaffold(
+        backgroundColor: Color(0xFFE9E6E6),
         appBar: AppBar(
           leading: IconButton(
             icon: Icon(
@@ -89,11 +90,11 @@ class _LawyersListScreenState extends State<LawyersListScreen> {
                         textCapitalization: TextCapitalization.sentences,
                         onChanged: (value) {
                           setState(() {
-    
                             String searchKey = value;
                             lawStream = FirebaseFirestore.instance
                                 .collection('lawyers')
-                                .where('name', isGreaterThanOrEqualTo: searchKey)
+                                .where('name',
+                                    isGreaterThanOrEqualTo: searchKey)
                                 .where('name', isLessThan: searchKey + '\uf8ff')
                                 .snapshots();
                           });
@@ -108,7 +109,8 @@ class _LawyersListScreenState extends State<LawyersListScreen> {
                             size: 30,
                             color: Color(0xff4F7344),
                           ),
-                          contentPadding: const EdgeInsets.fromLTRB(15, 8, 15, 8),
+                          contentPadding:
+                              const EdgeInsets.fromLTRB(15, 8, 15, 8),
                           hintText: 'Search for Lawyer',
                           border: const OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(10)),
