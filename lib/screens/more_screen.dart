@@ -25,6 +25,7 @@ class MoreScreen extends StatelessWidget {
         return false;
       },
       child: Scaffold(
+        backgroundColor: Color(0xFFE9E6E6),
         appBar: AppBar(
           leading: IconButton(
             icon: Icon(
@@ -52,6 +53,14 @@ class MoreScreen extends StatelessWidget {
           child: Column(
             children: [
               SizedBox(height: 30),
+              MoreCardWidget(
+                cardTitle: "Profile",
+                iconData: Icons.person,
+                onTab: () {
+                  Navigator.pushReplacementNamed(context, '/userprofile');
+                },
+              ),
+              SizedBox(height: 10),
               MoreCardWidget(
                 cardTitle: "About Us",
                 iconData: Icons.web,

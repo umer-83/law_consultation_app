@@ -9,6 +9,7 @@ class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _SignUpScreenState createState() => _SignUpScreenState();
 }
 
@@ -22,10 +23,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final List<String> errors = [];
 // func with named parameter
   void addError({String? error}) {
-    if (!errors.contains(error))
+    if (!errors.contains(error)) {
       setState(() {
         errors.add(error!);
       });
+    }
   }
 
   void removeError({String? error}) {
@@ -241,13 +243,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     );
                                   }
                                 },
-                                child: Text(
-                                  "Register",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                  ),
-                                ),
                                 style: ButtonStyle(
                                   backgroundColor:
                                       MaterialStateProperty.all<Color>(
@@ -260,6 +255,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         color: Color(0xff4F7344),
                                       ),
                                     ),
+                                  ),
+                                ),
+                                child: Text(
+                                  "Register",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
                                   ),
                                 ),
                               ),
