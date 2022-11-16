@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class LawyerPortfolioDetails extends StatefulWidget {
   final DocumentSnapshot documentSnapshot;
@@ -503,6 +504,34 @@ class _LawyerPortfolioDetailsState extends State<LawyerPortfolioDetails> {
                                 );
                               },
                             );
+                          },
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Container(
+                        width: double.maxFinite,
+                        height: 50,
+                        child: ElevatedButton(
+                          child: const Text(
+                            'Contact Me!',
+                            style: TextStyle(fontSize: 20),
+                          ),
+                          style: ButtonStyle(
+                              padding: MaterialStateProperty.all<EdgeInsets>(
+                                  EdgeInsets.all(10)),
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  Color(0xff4F7344)),
+                              shape: MaterialStateProperty.all(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(30.0),
+                                      side: BorderSide(
+                                          color: Color(0xff4F7344))))),
+                          onPressed: () {
+                            final number =
+                                widget.documentSnapshot['phone'].toString();
+                            launch('tel://$number');
                           },
                         ),
                       )
