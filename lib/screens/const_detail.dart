@@ -3,6 +3,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class ConstDetails extends StatefulWidget {
   final DocumentSnapshot documentSnapshot;
@@ -87,6 +89,37 @@ class _ConstDetailsState extends State<ConstDetails> {
                             )),
                         SizedBox(
                           height: 12,
+                        ),
+                        SizedBox(
+                          width: double.infinity,
+                          height: 50,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              String furl =
+                                  widget.documentSnapshot['link'].toString();
+                              launchUrlString(furl);
+                            },
+                            child: Text(
+                              "Visit Site For More!",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                              ),
+                            ),
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                Color(0xff4F7344),
+                              ),
+                              shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12.0),
+                                  side: const BorderSide(
+                                    color: Color(0xff4F7344),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
                       ]))
             ])),
