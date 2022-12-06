@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
 
 class BottomNavBarWidget extends StatefulWidget {
   const BottomNavBarWidget({
@@ -18,40 +17,29 @@ class BottomNavBarWidget extends StatefulWidget {
 class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 70,
-      color: Colors.white,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
-        child: GNav(
-          gap: 5,
-          activeColor: Colors.white,
-          iconSize: 30,
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-          duration: Duration(milliseconds: 800),
-          tabBackgroundColor: Color(0xff4F7344),
-          tabs: const [
-            GButton(
-              icon: Icons.home,
-              text: 'Home',
-            ),
-            GButton(
-              icon: Icons.add_circle_outline,
-              text: 'Register',
-            ),
-            GButton(
-              icon: Icons.people,
-              text: 'Lawyers',
-            ),
-            GButton(
-              icon: Icons.dehaze,
-              text: 'More',
-            ),
-          ],
-          selectedIndex: widget.cIndex,
-          onTabChange: widget.onChange,
+    return BottomNavigationBar(
+      currentIndex: widget.cIndex,
+      onTap: widget.onChange,
+      type: BottomNavigationBarType.fixed,
+      items: const [
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home),
+          label: 'Home',
         ),
-      ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.add_circle_outline),
+          label: 'Register',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.people),
+          label: 'Lawyers',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.dehaze),
+          label: 'More',
+        ),
+      ],
+      selectedItemColor: Color(0xff4F7344),
     );
   }
 }

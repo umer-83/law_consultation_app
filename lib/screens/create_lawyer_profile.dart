@@ -272,9 +272,6 @@ class _CreateLawyerProfileState extends State<CreateLawyerProfile> {
                               FilteringTextInputFormatter.allow(
                                 RegExp('[a-zA-Z]'),
                               ),
-                              FilteringTextInputFormatter.deny(
-                                RegExp('[abFeG]'),
-                              ),
                             ],
                           ),
                           TextField(
