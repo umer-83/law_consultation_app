@@ -30,6 +30,22 @@ class _CreateLawyerProfileState extends State<CreateLawyerProfile> {
   File? imageFile;
   List<File> workImageFile = [];
   final picker = ImagePicker();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final List<String> errors = [];
+  // func with named parameter
+  void addError({String? error}) {
+    if (!errors.contains(error))
+      setState(() {
+        errors.add(error!);
+      });
+  }
+
+  void removeError({String? error}) {
+    if (errors.contains(error))
+      setState(() {
+        errors.remove(error);
+      });
+  }
 
   FirebaseStorage storage = FirebaseStorage.instance;
   TextEditingController company_name = TextEditingController();
@@ -183,173 +199,150 @@ class _CreateLawyerProfileState extends State<CreateLawyerProfile> {
           elevation: 1,
           centerTitle: true,
         ),
-        body: SingleChildScrollView(
-          child: SafeArea(
-            child: GestureDetector(
-              onTap: () {
-                FocusScope.of(context).unfocus();
-              },
-              child: Padding(
-                padding: EdgeInsetsDirectional.all(0),
-                child: Column(
-                  children: [
-                    if (loading)
-                      LinearProgressIndicator(
-                        semanticsLabel: 'Linear progress indicator',
-                      ),
-                    Stack(children: [
-                      Container(
-                        color: Colors.grey.shade400,
-                        width: double.maxFinite,
-                        height: 250,
-                        child: imageFile != null
-                            ? Image.file(imageFile!)
-                            : Container(
-                                color: Colors.grey,
-                                height: 300,
-                                child: Center(
-                                  child: Text(
-                                    "Upload Image",
-                                    style: TextStyle(
-                                      fontSize: 30,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
+        body: Form(
+          key: _formKey,
+          child: SingleChildScrollView(
+            child: SafeArea(
+              child: GestureDetector(
+                onTap: () {
+                  FocusScope.of(context).unfocus();
+                },
+                child: Padding(
+                  padding: EdgeInsetsDirectional.all(0),
+                  child: Column(
+                    children: [
+                      if (loading)
+                        LinearProgressIndicator(
+                          semanticsLabel: 'Linear progress indicator',
+                        ),
+                      Stack(children: [
+                        Container(
+                          color: Colors.grey.shade400,
+                          width: double.maxFinite,
+                          height: 250,
+                          child: imageFile != null
+                              ? Image.file(imageFile!)
+                              : Container(
+                                  color: Colors.grey,
+                                  height: 300,
+                                  child: Center(
+                                    child: Text(
+                                      "Upload Image",
+                                      style: TextStyle(
+                                        fontSize: 30,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                      ),
-                      SizedBox(
-                        width: double.maxFinite,
-                        height: 250,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              padding: EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                  color: Colors.grey.shade300.withOpacity(.7),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(50))),
-                              child: IconButton(
-                                onPressed: SelectImageFromGallery,
-                                icon: Icon(
-                                  Icons.camera_alt,
-                                  size: 34.0,
-                                  color: Colors.black,
-                                ),
-                              ),
-                            )
-                          ],
                         ),
-                      ),
-                    ]),
-                    Container(
-                      padding: EdgeInsets.all(20),
-                      child: Column(
-                        children: [
-                          TextFormField(
-                            textCapitalization: TextCapitalization.sentences,
-                            controller: company_name,
-                            style: TextStyle(fontSize: 14),
-                            decoration: InputDecoration(
-                                focusedBorder: UnderlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: Colors.black, width: 2.0),
+                        SizedBox(
+                          width: double.maxFinite,
+                          height: 250,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Container(
+                                padding: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                    color: Colors.grey.shade300.withOpacity(.7),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(50))),
+                                child: IconButton(
+                                  onPressed: SelectImageFromGallery,
+                                  icon: Icon(
+                                    Icons.camera_alt,
+                                    size: 34.0,
+                                    color: Colors.black,
+                                  ),
                                 ),
-                                enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.black, width: 2)),
-                                contentPadding:
-                                    EdgeInsets.fromLTRB(0, 15, 15, 3),
-                                border: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.black, width: 2)),
-                                hintText: 'Lawyer Name',
-                                labelText: "Lawyer  Name"),
-                            inputFormatters: [
-                              FilteringTextInputFormatter.allow(
-                                RegExp('[a-zA-Z]'),
-                              ),
-                              FilteringTextInputFormatter.deny(
-                                RegExp('[abFeG]'),
-                              ),
+                              )
                             ],
                           ),
-                          TextField(
-                            textCapitalization: TextCapitalization.sentences,
-                            controller: services,
-                            style: TextStyle(fontSize: 14),
-                            decoration: InputDecoration(
-                                focusedBorder: UnderlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: Colors.black, width: 2.0),
+                        ),
+                      ]),
+                      Container(
+                        padding: EdgeInsets.all(20),
+                        child: Column(
+                          children: [
+                            TextFormField(
+                              textCapitalization: TextCapitalization.sentences,
+                              controller: company_name,
+                              style: TextStyle(fontSize: 14),
+                              decoration: InputDecoration(
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide: const BorderSide(
+                                        color: Colors.black, width: 2.0),
+                                  ),
+                                  enabledBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Colors.black, width: 2)),
+                                  contentPadding:
+                                      EdgeInsets.fromLTRB(0, 15, 15, 3),
+                                  border: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Colors.black, width: 2)),
+                                  hintText: 'Lawyer Name',
+                                  labelText: "Lawyer  Name"),
+                              inputFormatters: [
+                                FilteringTextInputFormatter.allow(
+                                  RegExp('[a-zA-Z]'),
                                 ),
-                                enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.black, width: 2)),
-                                contentPadding:
-                                    EdgeInsets.fromLTRB(0, 15, 15, 3),
-                                border: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.black, width: 2)),
-                                hintText: 'Year Of Experience',
-                                labelText: "Year Of Experience"),
-                          ),
-                          TextFormField(
-                            textCapitalization: TextCapitalization.sentences,
-                            controller: phone,
-                            maxLength: 11,
-                            style: TextStyle(fontSize: 14),
-                            decoration: InputDecoration(
-                                focusedBorder: UnderlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: Colors.black, width: 2.0),
-                                ),
-                                enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.black, width: 2)),
-                                contentPadding:
-                                    EdgeInsets.fromLTRB(0, 15, 15, 3),
-                                border: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.black, width: 2)),
-                                hintText: 'Phone Number',
-                                labelText: "Phone Number"),
-                            inputFormatters: [
-                              FilteringTextInputFormatter.allow(
-                                RegExp('[0-9]'),
-                              ),
-                            ],
-                          ),
-                          TextField(
-                            textCapitalization: TextCapitalization.sentences,
-                            controller: address,
-                            style: TextStyle(fontSize: 14),
-                            decoration: InputDecoration(
-                              focusedBorder: UnderlineInputBorder(
-                                borderSide: const BorderSide(
-                                    color: Colors.black, width: 2.0),
-                              ),
-                              enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Colors.black, width: 2)),
-                              contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 3),
-                              border: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Colors.black, width: 2)),
-                              hintText: 'Address',
-                              labelText: "Address",
+                              ],
                             ),
-                          ),
-                          TextField(
-                            textCapitalization: TextCapitalization.sentences,
-                            controller: quanti,
-                            style: TextStyle(fontSize: 14),
-                            minLines: 2,
-                            maxLines: 5,
-                            decoration: InputDecoration(
+                            TextField(
+                              textCapitalization: TextCapitalization.sentences,
+                              controller: services,
+                              style: TextStyle(fontSize: 14),
+                              decoration: InputDecoration(
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide: const BorderSide(
+                                        color: Colors.black, width: 2.0),
+                                  ),
+                                  enabledBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Colors.black, width: 2)),
+                                  contentPadding:
+                                      EdgeInsets.fromLTRB(0, 15, 15, 3),
+                                  border: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Colors.black, width: 2)),
+                                  hintText: 'Year Of Experience',
+                                  labelText: "Year Of Experience"),
+                            ),
+                            TextFormField(
+                              textCapitalization: TextCapitalization.sentences,
+                              controller: phone,
+                              maxLength: 11,
+                              style: TextStyle(fontSize: 14),
+                              decoration: InputDecoration(
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide: const BorderSide(
+                                        color: Colors.black, width: 2.0),
+                                  ),
+                                  enabledBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Colors.black, width: 2)),
+                                  contentPadding:
+                                      EdgeInsets.fromLTRB(0, 15, 15, 3),
+                                  border: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Colors.black, width: 2)),
+                                  hintText: 'Phone Number',
+                                  labelText: "Phone Number"),
+                              inputFormatters: [
+                                FilteringTextInputFormatter.allow(
+                                  RegExp('[0-9]'),
+                                ),
+                              ],
+                            ),
+                            TextField(
+                              textCapitalization: TextCapitalization.sentences,
+                              controller: address,
+                              style: TextStyle(fontSize: 14),
+                              decoration: InputDecoration(
                                 focusedBorder: UnderlineInputBorder(
                                   borderSide: const BorderSide(
                                       color: Colors.black, width: 2.0),
@@ -362,184 +355,230 @@ class _CreateLawyerProfileState extends State<CreateLawyerProfile> {
                                 border: UnderlineInputBorder(
                                     borderSide: BorderSide(
                                         color: Colors.black, width: 2)),
-                                hintText: 'Email',
-                                labelText: "Email"),
-                          ),
-                          TextField(
-                            textCapitalization: TextCapitalization.sentences,
-                            controller: description,
-                            style: TextStyle(fontSize: 14),
-                            minLines: 2,
-                            maxLines: 5,
-                            decoration: InputDecoration(
-                                focusedBorder: UnderlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: Colors.black, width: 2.0),
-                                ),
-                                enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.black, width: 2)),
-                                contentPadding:
-                                    EdgeInsets.fromLTRB(0, 15, 15, 3),
-                                border: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.black, width: 2)),
-                                hintText: 'Area Of Expertise',
-                                labelText: "Area Of Expertise"),
-                          ),
-                          TextField(
-                            textCapitalization: TextCapitalization.sentences,
-                            controller: fee,
-                            style: TextStyle(fontSize: 14),
-                            minLines: 2,
-                            maxLines: 5,
-                            decoration: InputDecoration(
-                                focusedBorder: UnderlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: Colors.black, width: 2.0),
-                                ),
-                                enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.black, width: 2)),
-                                contentPadding:
-                                    EdgeInsets.fromLTRB(0, 15, 15, 3),
-                                border: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.black, width: 2)),
-                                hintText: 'Consultation Fee',
-                                labelText: "Consultation Fee"),
-                            inputFormatters: [
-                              FilteringTextInputFormatter.allow(
-                                RegExp('[0-9]'),
+                                hintText: 'Address',
+                                labelText: "Address",
                               ),
-                            ],
-                          ),
-                          TextField(
-                            textCapitalization: TextCapitalization.sentences,
-                            controller: city,
-                            style: TextStyle(fontSize: 14),
-                            minLines: 2,
-                            maxLines: 5,
-                            decoration: InputDecoration(
-                                focusedBorder: UnderlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: Colors.black, width: 2.0),
+                            ),
+                            TextFormField(
+                              textCapitalization: TextCapitalization.sentences,
+                              controller: quanti,
+                              style: TextStyle(fontSize: 14),
+                              minLines: 2,
+                              maxLines: 5,
+                              decoration: InputDecoration(
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide: const BorderSide(
+                                        color: Colors.black, width: 2.0),
+                                  ),
+                                  enabledBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Colors.black, width: 2)),
+                                  contentPadding:
+                                      EdgeInsets.fromLTRB(0, 15, 15, 3),
+                                  border: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Colors.black, width: 2)),
+                                  hintText: 'Email',
+                                  labelText: "Email"),
+                              onChanged: (value) {
+                                if (value.isNotEmpty &&
+                                    errors.contains('kEmailNullError')) {
+                                  removeError(error: 'kEmailNullError');
+                                } else if (value.isNotEmpty) {
+                                  addError(error: 'kInvalidEmailError');
+                                  return null;
+                                }
+                              },
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  addError(error: 'kEmailNullError');
+                                  removeError(error: 'kInvalidEmailError');
+                                  return 'Email is required!';
+                                } else if (value.isNotEmpty) {
+                                  addError(error: 'kInvalidEmailError');
+                                }
+                                return null;
+                              },
+                            ),
+                            TextField(
+                              textCapitalization: TextCapitalization.sentences,
+                              controller: description,
+                              style: TextStyle(fontSize: 14),
+                              minLines: 2,
+                              maxLines: 5,
+                              decoration: InputDecoration(
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide: const BorderSide(
+                                        color: Colors.black, width: 2.0),
+                                  ),
+                                  enabledBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Colors.black, width: 2)),
+                                  contentPadding:
+                                      EdgeInsets.fromLTRB(0, 15, 15, 3),
+                                  border: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Colors.black, width: 2)),
+                                  hintText: 'Area Of Expertise',
+                                  labelText: "Area Of Expertise"),
+                            ),
+                            TextField(
+                              textCapitalization: TextCapitalization.sentences,
+                              controller: fee,
+                              style: TextStyle(fontSize: 14),
+                              minLines: 2,
+                              maxLines: 5,
+                              decoration: InputDecoration(
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide: const BorderSide(
+                                        color: Colors.black, width: 2.0),
+                                  ),
+                                  enabledBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Colors.black, width: 2)),
+                                  contentPadding:
+                                      EdgeInsets.fromLTRB(0, 15, 15, 3),
+                                  border: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Colors.black, width: 2)),
+                                  hintText: 'Consultation Fee',
+                                  labelText: "Consultation Fee"),
+                              inputFormatters: [
+                                FilteringTextInputFormatter.allow(
+                                  RegExp('[0-9]'),
                                 ),
-                                enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.black, width: 2)),
-                                contentPadding:
-                                    EdgeInsets.fromLTRB(0, 15, 15, 3),
-                                border: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.black, width: 2)),
-                                hintText: 'City',
-                                labelText: "City"),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(top: 20),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Upload Images of Degree",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20)),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                GridView.count(
-                                  primary: false,
-                                  shrinkWrap: true,
-                                  crossAxisCount: 3,
-                                  crossAxisSpacing: 10,
-                                  mainAxisSpacing: 10,
-                                  children: [
-                                    ...List.generate(
-                                      workImageFile.length,
-                                      (index) => Container(
+                              ],
+                            ),
+                            TextField(
+                              textCapitalization: TextCapitalization.sentences,
+                              controller: city,
+                              style: TextStyle(fontSize: 14),
+                              minLines: 2,
+                              maxLines: 5,
+                              decoration: InputDecoration(
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide: const BorderSide(
+                                        color: Colors.black, width: 2.0),
+                                  ),
+                                  enabledBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Colors.black, width: 2)),
+                                  contentPadding:
+                                      EdgeInsets.fromLTRB(0, 15, 15, 3),
+                                  border: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Colors.black, width: 2)),
+                                  hintText: 'City',
+                                  labelText: "City"),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(top: 20),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("Upload Images of Degree",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20)),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  GridView.count(
+                                    primary: false,
+                                    shrinkWrap: true,
+                                    crossAxisCount: 3,
+                                    crossAxisSpacing: 10,
+                                    mainAxisSpacing: 10,
+                                    children: [
+                                      ...List.generate(
+                                        workImageFile.length,
+                                        (index) => Container(
+                                          width: 100,
+                                          height: 100,
+                                          clipBehavior: Clip.hardEdge,
+                                          child: Image.file(
+                                            workImageFile[index],
+                                            width: double.maxFinite,
+                                            fit: BoxFit.cover,
+                                            height: 100,
+                                          ),
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                const BorderRadius.all(
+                                                    Radius.circular(5)),
+                                            color: Colors.grey.shade200,
+                                          ),
+                                        ),
+                                      ),
+                                      Container(
                                         width: 100,
                                         height: 100,
-                                        clipBehavior: Clip.hardEdge,
-                                        child: Image.file(
-                                          workImageFile[index],
-                                          width: double.maxFinite,
-                                          fit: BoxFit.cover,
-                                          height: 100,
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Tooltip(
+                                              message: "Add your photos",
+                                              child: IconButton(
+                                                  onPressed: SelectImageOfWork,
+                                                  icon: Icon(Icons.add,
+                                                      size: 30)),
+                                            )
+                                          ],
                                         ),
                                         decoration: BoxDecoration(
-                                          borderRadius: const BorderRadius.all(
+                                          borderRadius: BorderRadius.all(
                                               Radius.circular(5)),
-                                          color: Colors.grey.shade200,
+                                          color: Colors.grey.shade400,
                                         ),
                                       ),
-                                    ),
-                                    Container(
-                                      width: 100,
-                                      height: 100,
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Tooltip(
-                                            message: "Add your photos",
-                                            child: IconButton(
-                                                onPressed: SelectImageOfWork,
-                                                icon:
-                                                    Icon(Icons.add, size: 30)),
-                                          )
-                                        ],
+                                    ],
+                                  ),
+                                  SizedBox(height: 20),
+                                  SizedBox(
+                                    width: double.infinity,
+                                    height: 50,
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        if (_formKey.currentState!.validate()) {
+                                          OnSave();
+                                        }
+                                      },
+                                      child: Text(
+                                        "Save",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                        ),
                                       ),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(5)),
-                                        color: Colors.grey.shade400,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(height: 20),
-                                SizedBox(
-                                  width: double.infinity,
-                                  height: 50,
-                                  child: ElevatedButton(
-                                    onPressed: () {
-                                      OnSave();
-                                    },
-                                    child: Text(
-                                      "Save",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                    style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all<Color>(
-                                        Color(0xff4F7344),
-                                      ),
-                                      shape: MaterialStateProperty.all(
-                                        RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(12.0),
-                                          side: const BorderSide(
-                                            color: Color(0xff4F7344),
+                                      style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStateProperty.all<Color>(
+                                          Color(0xff4F7344),
+                                        ),
+                                        shape: MaterialStateProperty.all(
+                                          RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(12.0),
+                                            side: const BorderSide(
+                                              color: Color(0xff4F7344),
+                                            ),
                                           ),
                                         ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                SizedBox(height: 20),
-                              ],
+                                  SizedBox(height: 20),
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
