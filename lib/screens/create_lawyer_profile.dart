@@ -491,6 +491,10 @@ class _CreateLawyerProfileState extends State<CreateLawyerProfile> {
                                   addError(error: 'kInvalidEmailError');
                                   return 'Invalid Email!';
                                 }
+                                else if (!value.contains(".")) {
+                                  addError(error: 'kInvalidEmailError');
+                                  return 'Invalid Email!';
+                                }
                                 return null;
                               },
                             ),
