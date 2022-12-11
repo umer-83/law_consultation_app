@@ -11,6 +11,7 @@ class CivilLawScreen extends StatefulWidget {
 }
 
 class _CivilLawScreenState extends State<CivilLawScreen> {
+  String dropdownValue = 'title';
   @override
   Stream lawStream = FirebaseFirestore.instance.collection('civil').snapshots();
   Widget build(BuildContext context) {
@@ -56,7 +57,7 @@ class _CivilLawScreenState extends State<CivilLawScreen> {
                 ),
                 Row(
                   mainAxisSize: MainAxisSize.max,
-                  children: const [
+                  children: [
                     Text(
                       'Find civil law here!',
                       style: TextStyle(
@@ -69,6 +70,33 @@ class _CivilLawScreenState extends State<CivilLawScreen> {
                 const SizedBox(
                   height: 10,
                 ),
+                
+                DropdownButton<String>(
+                  isExpanded: false,
+                  underline: SizedBox(),
+                  value: dropdownValue,
+                  hint: Text(
+                    "Select",
+                    style: TextStyle(color: Colors.black),
+                  ),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      dropdownValue = newValue!;
+                    });
+                  },
+                  items: <String>[
+                    'title',
+                    'subtitle',
+                  ].map((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(
+                        value,
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    );
+                  }).toList(),
+                ),
                 Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -79,10 +107,9 @@ class _CivilLawScreenState extends State<CivilLawScreen> {
                             String searchKey = value;
                             lawStream = FirebaseFirestore.instance
                                 .collection('civil')
-                                .where('title',
-                                    isGreaterThanOrEqualTo:
-                                        searchKey.toUpperCase())
-                                .where('title',
+                                .where(dropdownValue,
+                                    isGreaterThanOrEqualTo: searchKey)
+                                .where(dropdownValue,
                                     isLessThan: searchKey + '\uf8ff')
                                 .snapshots();
                           });

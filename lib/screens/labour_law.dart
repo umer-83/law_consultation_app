@@ -14,6 +14,7 @@ class LabourLawScreen extends StatefulWidget {
 class _LabourLawScreenState extends State<LabourLawScreen> {
   Stream lawStream =
       FirebaseFirestore.instance.collection('labour').snapshots();
+  String dropdownValue = 'title';
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -71,6 +72,32 @@ class _LabourLawScreenState extends State<LabourLawScreen> {
                 const SizedBox(
                   height: 10,
                 ),
+                DropdownButton<String>(
+                  isExpanded: false,
+                  underline: SizedBox(),
+                  value: dropdownValue,
+                  hint: Text(
+                    "Select",
+                    style: TextStyle(color: Colors.black),
+                  ),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      dropdownValue = newValue!;
+                    });
+                  },
+                  items: <String>[
+                    'title',
+                    'subtitle',
+                  ].map((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(
+                        value,
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    );
+                  }).toList(),
+                ),
                 Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -81,10 +108,11 @@ class _LabourLawScreenState extends State<LabourLawScreen> {
                             String searchKey = value;
                             lawStream = FirebaseFirestore.instance
                                 .collection('labour')
-                                .where('title',
+                                .where(dropdownValue,
                                     isGreaterThanOrEqualTo:
                                         searchKey.toUpperCase())
-                                .where('title', isLessThan: searchKey + '\uf8ff')
+                                .where(dropdownValue,
+                                    isLessThan: searchKey + '\uf8ff')
                                 .snapshots();
                           });
                         },
@@ -98,7 +126,8 @@ class _LabourLawScreenState extends State<LabourLawScreen> {
                             size: 30,
                             color: Color(0xff4F7344),
                           ),
-                          contentPadding: const EdgeInsets.fromLTRB(15, 8, 15, 8),
+                          contentPadding:
+                              const EdgeInsets.fromLTRB(15, 8, 15, 8),
                           hintText: 'Search for Labour Law',
                           border: const OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(10)),

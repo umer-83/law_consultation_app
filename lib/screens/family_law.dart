@@ -14,6 +14,7 @@ class FamilyLawScreen extends StatefulWidget {
 class _FamilyLawScreenState extends State<FamilyLawScreen> {
   Stream lawStream =
       FirebaseFirestore.instance.collection('family').snapshots();
+      String dropdownValue = 'title';
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -71,6 +72,32 @@ class _FamilyLawScreenState extends State<FamilyLawScreen> {
                 const SizedBox(
                   height: 10,
                 ),
+                DropdownButton<String>(
+                  isExpanded: false,
+                  underline: SizedBox(),
+                  value: dropdownValue,
+                  hint: Text(
+                    "Select",
+                    style: TextStyle(color: Colors.black),
+                  ),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      dropdownValue = newValue!;
+                    });
+                  },
+                  items: <String>[
+                    'title',
+                    'subtitle',
+                  ].map((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(
+                        value,
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    );
+                  }).toList(),
+                ),
                 Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -81,10 +108,10 @@ class _FamilyLawScreenState extends State<FamilyLawScreen> {
                             String searchKey = value;
                             lawStream = FirebaseFirestore.instance
                                 .collection('family')
-                                .where('title',
+                                .where(dropdownValue,
                                     isGreaterThanOrEqualTo:
                                         searchKey.toUpperCase())
-                                .where('title',
+                                .where(dropdownValue,
                                     isLessThan: searchKey + '\uf8ff')
                                 .snapshots();
                           });
