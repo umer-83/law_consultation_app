@@ -34,17 +34,19 @@ class _CreateLawyerProfileState extends State<CreateLawyerProfile> {
   final List<String> errors = [];
   // func with named parameter
   void addError({String? error}) {
-    if (!errors.contains(error))
+    if (!errors.contains(error)) {
       setState(() {
         errors.add(error!);
       });
+    }
   }
 
   void removeError({String? error}) {
-    if (errors.contains(error))
+    if (errors.contains(error)) {
       setState(() {
         errors.remove(error);
       });
+    }
   }
 
   FirebaseStorage storage = FirebaseStorage.instance;
@@ -80,7 +82,8 @@ class _CreateLawyerProfileState extends State<CreateLawyerProfile> {
     }
   }
 
-  Future OnSave() async {
+  Future data() async {
+    final cover_image = await saveFileToFireBase(imageFile!);
     var service = services.text;
     var phon = phone.text;
     var company_nam = company_name.text;
@@ -89,25 +92,6 @@ class _CreateLawyerProfileState extends State<CreateLawyerProfile> {
     var quant = quanti.text;
     var feee = fee.text;
     var cityy = city.text;
-    setState(
-      () {
-        Future.delayed(
-          Duration(seconds: 10),
-          () {
-            Navigator.pushReplacementNamed(context, '/lawyerslist');
-          },
-        );
-      },
-    );
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Saving in Progress..'),
-        duration: Duration(seconds: 10),
-      ),
-    );
-
-    final cover_image = await saveFileToFireBase(imageFile!);
-
     List<String> portfolio = [];
     if (workImageFile.length > 0) {
       for (var eachFile in workImageFile) {
@@ -135,29 +119,133 @@ class _CreateLawyerProfileState extends State<CreateLawyerProfile> {
         .catchError((error) => print('Failed to Add user: $error'));
   }
 
+  Future OnSave() async {
+    // var service = services.text;
+    // var phon = phone.text;
+    // var company_nam = company_name.text;
+    // var descripton = description.text;
+    // var addres = address.text;
+    // var quant = quanti.text;
+    // var feee = fee.text;
+    // var cityy = city.text;
+    setState(
+      () {
+        if (imageFile == null) {
+          [
+            Future.delayed(
+              Duration(seconds: 0),
+              () {},
+            )
+          ];
+        } else if (workImageFile.length == 0) {
+          [
+            Future.delayed(
+              Duration(seconds: 0),
+              () {},
+            )
+          ];
+        } else if (imageFile == null && workImageFile.length == 0) {
+          [
+            Future.delayed(
+              Duration(seconds: 0),
+              () {},
+            )
+          ];
+        } else {
+          [
+            Future.delayed(
+              Duration(seconds: 10),
+              () {
+                Navigator.pushReplacementNamed(context, '/lawyerslist');
+              },
+            )
+          ];
+        }
+      },
+    );
+    if (imageFile == null) {
+      [
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Please upload profile picture!'),
+            duration: Duration(seconds: 10),
+          ),
+        )
+      ];
+    } else if (workImageFile.length == 0) {
+      [
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Please upload degree picture!'),
+            duration: Duration(seconds: 10),
+          ),
+        )
+      ];
+    } else if (imageFile == null && workImageFile.length == 0) {
+      [
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Please upload profile & degree picture!'),
+            duration: Duration(seconds: 10),
+          ),
+        )
+      ];
+    } else {
+      [
+        data(),
+      ];
+    }
+
+    // final cover_image = await saveFileToFireBase(imageFile!);
+
+    // List<String> portfolio = [];
+    // if (workImageFile.length > 0) {
+    //   for (var eachFile in workImageFile) {
+    //     String portfolioImageUrl = await saveFileToFireBase(eachFile);
+    //     portfolio.add(portfolioImageUrl);
+    //   }
+    // }
+
+    // return sizes
+    //     .add({
+    //       'userid': FirebaseAuth.instance.currentUser!.uid,
+    //       'address': addres,
+    //       'name': company_nam,
+    //       'cover_image': cover_image.toString(),
+    //       'degrees': portfolio.toList(),
+    //       'expert': descripton,
+    //       'phone': phon,
+    //       'email': quant,
+    //       'yofexp': service,
+    //       'city': cityy,
+    //       'fee': feee,
+    //       'review': rev,
+    //     })
+    //     .then((value) => print('User Added'))
+    //     .catchError((error) => print('Failed to Add user: $error'));
+  }
+
   CollectionReference sizes = FirebaseFirestore.instance.collection('lawyers');
 
   Future saveFileToFireBase(File file) async {
-    if (file != null) {
-      List<String> extensionLists = file.path.split(".");
-      String extension = extensionLists.last;
-      String fileName = const Uuid().v4();
-      try {
-        await FirebaseStorage.instance
-            .ref('appImages/$fileName.$extension')
-            .putFile(File(file.path));
+    List<String> extensionLists = file.path.split(".");
+    String extension = extensionLists.last;
+    String fileName = const Uuid().v4();
+    try {
+      await FirebaseStorage.instance
+          .ref('appImages/$fileName.$extension')
+          .putFile(File(file.path));
 
-        String fileUrl = await FirebaseStorage.instance
-            .ref('appImages/$fileName.$extension')
-            .getDownloadURL();
+      String fileUrl = await FirebaseStorage.instance
+          .ref('appImages/$fileName.$extension')
+          .getDownloadURL();
 
-        return fileUrl;
-      } on FirebaseException catch (e) {
-        // e.g, e.code == 'canceled'
-        print("errorsss => $e");
-      }
-      return 'null';
+      return fileUrl;
+    } on FirebaseException catch (e) {
+      // e.g, e.code == 'canceled'
+      print("errorsss => $e");
     }
+    return 'null';
   }
 
   void onChangeNavigation(int index) {
@@ -311,6 +399,11 @@ class _CreateLawyerProfileState extends State<CreateLawyerProfile> {
                                           color: Colors.black, width: 2)),
                                   hintText: 'Year Of Experience',
                                   labelText: "Year Of Experience"),
+                              inputFormatters: [
+                                FilteringTextInputFormatter.allow(
+                                  RegExp('[0-9]'),
+                                ),
+                              ],
                             ),
                             TextFormField(
                               textCapitalization: TextCapitalization.sentences,
@@ -394,8 +487,9 @@ class _CreateLawyerProfileState extends State<CreateLawyerProfile> {
                                   addError(error: 'kEmailNullError');
                                   removeError(error: 'kInvalidEmailError');
                                   return 'Email is required!';
-                                } else if (value.isNotEmpty) {
+                                } else if (!value.contains("@")) {
                                   addError(error: 'kInvalidEmailError');
+                                  return 'Invalid Email!';
                                 }
                                 return null;
                               },
