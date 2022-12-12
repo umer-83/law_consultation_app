@@ -376,11 +376,18 @@ class _CreateLawyerProfileState extends State<CreateLawyerProfile> {
                                   labelText: "Lawyer  Name"),
                               inputFormatters: [
                                 FilteringTextInputFormatter.allow(
-                                  RegExp('[a-zA-Z]'),
+                                  RegExp(r'[a-zA-Z]+|\s'),
                                 ),
                               ],
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  addError(error: 'userNameNullError');
+                                  removeError(error: 'userNameNullError');
+                                  return 'Username is required!';
+                                }
+                              },
                             ),
-                            TextField(
+                            TextFormField(
                               textCapitalization: TextCapitalization.sentences,
                               controller: services,
                               style: TextStyle(fontSize: 14),
@@ -404,6 +411,13 @@ class _CreateLawyerProfileState extends State<CreateLawyerProfile> {
                                   RegExp('[0-9]'),
                                 ),
                               ],
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  addError(error: 'yearOfExpNullError');
+                                  removeError(error: 'yearOfExpNullError');
+                                  return 'Year Of Exp is required!';
+                                }
+                              },
                             ),
                             TextFormField(
                               textCapitalization: TextCapitalization.sentences,
@@ -430,8 +444,15 @@ class _CreateLawyerProfileState extends State<CreateLawyerProfile> {
                                   RegExp('[0-9]'),
                                 ),
                               ],
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  addError(error: 'numberNullError');
+                                  removeError(error: 'numberNullError');
+                                  return 'Phone No is required!';
+                                }
+                              },
                             ),
-                            TextField(
+                            TextFormField(
                               textCapitalization: TextCapitalization.sentences,
                               controller: address,
                               style: TextStyle(fontSize: 14),
@@ -451,6 +472,13 @@ class _CreateLawyerProfileState extends State<CreateLawyerProfile> {
                                 hintText: 'Address',
                                 labelText: "Address",
                               ),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  addError(error: 'addressNullError');
+                                  removeError(error: 'addressNullError');
+                                  return 'Address is required!';
+                                }
+                              },
                             ),
                             TextFormField(
                               textCapitalization: TextCapitalization.sentences,
@@ -490,20 +518,18 @@ class _CreateLawyerProfileState extends State<CreateLawyerProfile> {
                                 } else if (!value.contains("@")) {
                                   addError(error: 'kInvalidEmailError');
                                   return 'Invalid Email!';
-                                }
-                                else if (!value.contains(".")) {
+                                } else if (!value.contains(".")) {
                                   addError(error: 'kInvalidEmailError');
                                   return 'Invalid Email!';
                                 }
                                 return null;
                               },
                             ),
-                            TextField(
+                            TextFormField(
                               textCapitalization: TextCapitalization.sentences,
                               controller: description,
                               style: TextStyle(fontSize: 14),
-                              minLines: 2,
-                              maxLines: 5,
+                              maxLines: 1,
                               decoration: InputDecoration(
                                   focusedBorder: UnderlineInputBorder(
                                     borderSide: const BorderSide(
@@ -519,13 +545,19 @@ class _CreateLawyerProfileState extends State<CreateLawyerProfile> {
                                           color: Colors.black, width: 2)),
                                   hintText: 'Area Of Expertise',
                                   labelText: "Area Of Expertise"),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  addError(error: 'expertiseNullError');
+                                  removeError(error: 'expertiseNullError');
+                                  return 'Area of Expertise is required!';
+                                }
+                              },
                             ),
-                            TextField(
+                            TextFormField(
                               textCapitalization: TextCapitalization.sentences,
                               controller: fee,
                               style: TextStyle(fontSize: 14),
-                              minLines: 2,
-                              maxLines: 5,
+                              maxLines: 1,
                               decoration: InputDecoration(
                                   focusedBorder: UnderlineInputBorder(
                                     borderSide: const BorderSide(
@@ -546,13 +578,19 @@ class _CreateLawyerProfileState extends State<CreateLawyerProfile> {
                                   RegExp('[0-9]'),
                                 ),
                               ],
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  addError(error: 'expertiseNullError');
+                                  removeError(error: 'expertiseNullError');
+                                  return 'Expertise is required!';
+                                }
+                              },
                             ),
-                            TextField(
+                            TextFormField(
                               textCapitalization: TextCapitalization.sentences,
                               controller: city,
                               style: TextStyle(fontSize: 14),
-                              minLines: 2,
-                              maxLines: 5,
+                              maxLines: 1,
                               decoration: InputDecoration(
                                   focusedBorder: UnderlineInputBorder(
                                     borderSide: const BorderSide(
@@ -568,6 +606,13 @@ class _CreateLawyerProfileState extends State<CreateLawyerProfile> {
                                           color: Colors.black, width: 2)),
                                   hintText: 'City',
                                   labelText: "City"),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  addError(error: 'cityNullError');
+                                  removeError(error: 'cityNullError');
+                                  return 'City is required!';
+                                }
+                              },
                             ),
                             Container(
                               margin: EdgeInsets.only(top: 20),
