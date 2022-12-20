@@ -352,28 +352,28 @@ class _LawyerPortfolioDetailsState extends State<LawyerPortfolioDetails> {
                                               SizedBox(
                                                 height: 7,
                                               ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  RatingBar.builder(
-                                                    initialRating: 3,
-                                                    minRating: 1,
-                                                    direction: Axis.horizontal,
-                                                    allowHalfRating: true,
-                                                    itemCount: 5,
-                                                    itemPadding:
-                                                        EdgeInsets.symmetric(
-                                                            horizontal: 4.0),
-                                                    itemBuilder: (context, _) =>
-                                                        Icon(
-                                                      Icons.star,
-                                                      color: Colors.amber,
-                                                    ),
-                                                    onRatingUpdate: (rating) {},
-                                                  )
-                                                ],
-                                              ),
+                                              // Row(
+                                              //   mainAxisAlignment:
+                                              //       MainAxisAlignment.center,
+                                              //   children: [
+                                              //     RatingBar.builder(
+                                              //       initialRating: 3,
+                                              //       minRating: 1,
+                                              //       direction: Axis.horizontal,
+                                              //       allowHalfRating: true,
+                                              //       itemCount: 5,
+                                              //       itemPadding:
+                                              //           EdgeInsets.symmetric(
+                                              //               horizontal: 4.0),
+                                              //       itemBuilder: (context, _) =>
+                                              //           Icon(
+                                              //         Icons.star,
+                                              //         color: Colors.amber,
+                                              //       ),
+                                              //       onRatingUpdate: (rating) {},
+                                              //     )
+                                              //   ],
+                                              // ),
                                               SizedBox(height: 40),
                                               Padding(
                                                 padding:

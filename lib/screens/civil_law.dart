@@ -70,7 +70,6 @@ class _CivilLawScreenState extends State<CivilLawScreen> {
                 const SizedBox(
                   height: 10,
                 ),
-                
                 DropdownButton<String>(
                   isExpanded: false,
                   underline: SizedBox(),
@@ -108,7 +107,8 @@ class _CivilLawScreenState extends State<CivilLawScreen> {
                             lawStream = FirebaseFirestore.instance
                                 .collection('civil')
                                 .where(dropdownValue,
-                                    isGreaterThanOrEqualTo: searchKey)
+                                    isGreaterThanOrEqualTo:
+                                        searchKey.toUpperCase())
                                 .where(dropdownValue,
                                     isLessThan: searchKey + '\uf8ff')
                                 .snapshots();

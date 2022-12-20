@@ -234,7 +234,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         print("Created New Account");
                                         FocusScope.of(context).unfocus();
                                         Navigator.pushReplacementNamed(
-                                            context, '/home');
+                                            context, '/login');
                                       },
                                     ).onError(
                                       (error, stackTrace) {
